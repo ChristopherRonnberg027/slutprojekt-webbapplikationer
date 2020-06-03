@@ -1,5 +1,13 @@
 # Slutprojekt - Utveckling av Webbapplikationer och Agil utveckling
 
+Vi kommer att använda en variant av en Kanban-tavla. I backlogen lägger vi till användarorienterade features med checklistor med tekniska detaljer. 
+Varje morgon har vi ett kort sprint planning-möte där vi kompleterar backlogen och alla tar initiativ och tar på sig uppgifter för dagens sprint. Dessa uppgifter flyttas till todos-listan.
+Vi kommer även ha daily scrums vid lunch, där vi kommer att prata om vad vi har gjort hittills och hur det har gått samt vad som återstår att göra under dagen. Vi avslutar dagen med ett sprint review-möte där vi demonstrerar vad vi åstadkommit under dagen. Sprintlängden sträcker sig över en dag. Efter varje sprint ska vi försöka leverera en mvp.
+Vi arbetar tillsammans för att skapa en trygg arbetsmiljö genom att peppa varandra och kommunicera öppet. Under arbetet kommer vi att prova nya tillvägagångssätt så att vi får lära oss mer.
+
+Länk till trello https://trello.com/b/GioM2JUi/sinus
+
+
 ## Arbetssätt
 
 Samla era erfarenheter från Kanban, Scrum och diskussionerna av Modern Agile och kom överens i gruppen vilka delar och hur ni ska inkorporera detta i erat arbete. Dokumentera vad ni kommer överens om i README.md i erat repository.
