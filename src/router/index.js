@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Checkout from '../views/Checkout.vue'
-import LoginForm from '../views/LoginForm.vue'
+import Login from '../views/Login.vue'
 import MyAccount from '../views/MyAccount.vue'
 import Products from '../views/Products.vue'
 import ShoppingCart from '../views/ShoppingCart.vue'
@@ -22,9 +22,9 @@ Vue.use(VueRouter)
     component: Checkout
   },
   {
-    path: '/loginform',
-    name: 'LoginForm',
-    component: LoginForm
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/myaccount',
