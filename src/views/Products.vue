@@ -34,7 +34,7 @@ export default {
     }
     .product-list {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
         gap: 3rem;
         margin: 1rem;
     }
