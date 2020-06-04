@@ -27,8 +27,7 @@ async function register(user){
     if (response.status === 400) {
         return null
     } else {
-        let registeredUser = await response.json()
-        return registeredUser
+        return login({email: user.email, password: user.password});
     }
 
 }

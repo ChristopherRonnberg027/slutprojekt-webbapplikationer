@@ -4,10 +4,10 @@
       <img src="../assets/sinus-logo.svg" alt />
     </section>
     <section class="access">
-      <div class="profil" @click="accesProfil()">
+      <div class="profil" @click="accessProfile()">
         <img src="../assets/icon-user-black.svg" alt />
       </div>
-      <div class="cart" @click="accesCart()">
+      <div class="cart" @click="accessCart()">
         <img src="../assets/icon-bag-black.svg" alt />
         <div class="display">
           <p v-if="getItemQuantity()" v-text="getItemQuantity()"></p>
@@ -23,10 +23,14 @@ export default {
     getItemQuantity() {
       return 10;
     },
-    accesProfil() {
-      console.log("TO PROFIL");
+    accessProfile() {
+      if(this.$store.state.user) {
+        this.$router.push({name: 'MyAccount'});
+      } else {
+        this.$router.push({name: 'Login'});
+      }
     },
-    accesCart() {
+    accessCart() {
       console.log("TO CART/CHECKOUT");
     }
   }

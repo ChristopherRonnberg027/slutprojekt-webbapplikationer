@@ -13,11 +13,11 @@
       <p>name</p>
       <input clas="name" type="text" v-model="newUser.name" />
       <p>street</p>
-      <input clas="street" type="text" v-model="newUser.street" />
+      <input clas="street" type="text" v-model="newUser.adress.street" />
       <p>city</p>
-      <input clas="city" type="text" v-model="newUser.city" />
+      <input clas="city" type="text" v-model="newUser.adress.city" />
       <p>zip</p>
-      <input clas="zip" type="text" v-model="newUser.zip" />
+      <input clas="zip" type="text" v-model="newUser.adress.zip" />
       <button @click="registerUser()" class="registerbtn">register new</button>
     </section>
   </main>
@@ -31,6 +31,7 @@ export default {
         email: "",
         password: "",
         repeatPassword: "",
+        name: "",
         adress: {
           street: "",
           city: "",
@@ -41,8 +42,7 @@ export default {
   },
   methods: {
     registerUser() {
-      console.log("User registered");
-      //   this.$router.push(name = "MyAccount");
+      this.$store.dispatch('register', this.newUser);
     }
   }
 };

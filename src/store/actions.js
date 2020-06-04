@@ -6,3 +6,10 @@ export const login = async function (context, userCredentials) {
         context.commit('setUser', user);
     }
 }
+
+export const register = async function (context, newUser) {
+    let user = await API.register(newUser);
+    if (user) {
+        context.commit('setUser', user);
+    }
+}
