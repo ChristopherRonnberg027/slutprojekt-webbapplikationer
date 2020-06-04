@@ -18,8 +18,8 @@
       <input clas="city" type="text" v-model="newUser.city" />
       <p>zip</p>
       <input clas="zip" type="text" v-model="newUser.zip" />
+      <button @click="registerUser()" class="registerbtn">register new</button>
     </section>
-    <button @click="registerUser()" class="registerbtn">register new</button>
   </main>
 </template>
 
