@@ -23,3 +23,7 @@ export const getProduct = async function (context, id) {
     let product = await API.getSingleProduct(id);
     context.commit('setProduct', product);
 }
+
+export const logout = function (context) {
+    context.commit('logout');
+}
