@@ -7,6 +7,7 @@ import MyAccount from '../views/MyAccount.vue'
 import Products from '../views/Products.vue'
 import ShoppingCart from '../views/ShoppingCart.vue'
 import SingleProduct from '../views/SingleProduct'
+import Register from '../views/Register'
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,11 @@ Vue.use(VueRouter)
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
   },
   {
     path: '/myaccount',
