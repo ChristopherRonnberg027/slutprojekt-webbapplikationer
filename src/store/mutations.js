@@ -15,3 +15,7 @@ export const setProduct = (state, product) => {
     state.product = product;
 }
 
+export const logout = (state) => {
+    state.user = null;
+}
+
