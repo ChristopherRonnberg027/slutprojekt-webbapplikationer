@@ -4,8 +4,8 @@
         <section class="product-list">
             <product
                 v-for="(singleProduct,i) in productList"
-                v-bind:key="i"
-                v-bind:product="singleProduct"
+                :key="i"
+                :product="singleProduct"
             />
         </section>
     </main>
@@ -29,6 +29,10 @@ export default {
 
 <style lang="scss" scoped>
 .products {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 70vw;
     h1 {
         text-align: center;
     }
@@ -36,7 +40,7 @@ export default {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
         gap: 3rem;
-        margin: 1rem;
+        margin: 2rem 0;
     }
 }
 </style>

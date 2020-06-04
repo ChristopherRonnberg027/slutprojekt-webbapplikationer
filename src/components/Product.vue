@@ -1,6 +1,6 @@
 <template>
     <article class="product">
-        <router-link :to="'/products/'+product._id" class="image-container">
+        <router-link :to="'/products/'+product._id" :class="['image-container',{'single-product':singleProduct}]">
             <img :src="require('@/assets/'+product.imgFile)" alt />
         </router-link>
 
@@ -21,7 +21,8 @@
 export default {
     name: "Product",
     props: {
-        product: Object
+        product: Object,
+        singleProduct:Boolean
     },
     methods: {
         addToCart() {
@@ -49,6 +50,7 @@ export default {
 .product {
     font-size: 1.4rem;
     @include flex-column;
+
     .image-container {
         border-radius: 5px;
         background-color: #c4c4c4;
@@ -59,6 +61,12 @@ export default {
         img {
             object-fit: cover;
             width: 18rem;
+        }
+    }    
+    .single-product{
+        min-height: 30rem;
+        img {
+            width: 25rem;
         }
     }
     .product-info {
