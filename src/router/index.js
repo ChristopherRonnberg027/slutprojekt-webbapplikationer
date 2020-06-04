@@ -45,7 +45,8 @@ Vue.use(VueRouter)
   {
     path: '/products/:id',
     name: 'SingleProduct',
-    component: SingleProduct
+    component: SingleProduct,
+    props: true
   },
   {
     path: '/shoppingcart',

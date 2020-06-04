@@ -1,4 +1,7 @@
 export default {
     user: null,
-    cart: []
+    cart: [],
+    products: [],
+    singleProduct: null,
+    token: null
 }
