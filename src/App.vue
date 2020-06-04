@@ -23,5 +23,6 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  line-height: 1.6;
 }
 </style>
