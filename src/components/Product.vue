@@ -64,9 +64,9 @@ export default {
         }
     }    
     .single-product{
-        min-height: 30rem;
+        min-height: 30vw;
         img {
-            width: 25rem;
+            width: 100%;
         }
     }
     .product-info {
