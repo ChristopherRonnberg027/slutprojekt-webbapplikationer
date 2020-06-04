@@ -1,37 +1,56 @@
 <template>
   <header>
+    
     <section class="logo">
       <img src="../assets/sinus-logo.svg" alt />
     </section>
+
     <section class="access">
-      <div class="profil" @click="accessProfile()">
-        <img src="../assets/icon-user-black.svg" alt />
+      <div class="profile-container">
+        <div class="role-container" v-if="user">
+          <p class="display-role" ><strong>User: {{user.user.name}} role: {{user.user.role}}</strong></p>
+        </div>
+
+        <div class="profile" @click="accessProfile()">
+          <img src="../assets/icon-user-black.svg" alt />
+        </div>
       </div>
+
       <div class="cart" @click="accessCart()">
         <img src="../assets/icon-bag-black.svg" alt />
         <div class="display">
           <p v-if="getItemQuantity()" v-text="getItemQuantity()"></p>
         </div>
       </div>
+
     </section>
   </header>
 </template>
 
 <script>
 export default {
+  computed:{
+    user(){
+      return this.$store.state.user;
+    }  
+  },
   methods: {
     getItemQuantity() {
-      return 10;
+      return 7;
+      // return this.$store.getters.getCartLength();
     },
     accessProfile() {
-      if(this.$store.state.user) {
-        this.$router.push({name: 'MyAccount'});
+      if (this.$store.state.user) {
+        this.$router.push({ name: "MyAccount" });
       } else {
-        this.$router.push({name: 'Login'});
+        this.$router.push({ name: "Login" });
       }
     },
     accessCart() {
       console.log("TO CART/CHECKOUT");
+    },
+    userLog() {
+      return ;
     }
   }
 };
@@ -51,32 +70,46 @@ header {
       height: 3rem;
     }
   }
+
   .access {
-    // display: grid;
-    // grid-template-columns: 1fr 1fr;
-    width: 6rem;
+    max-width: 12rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .profil {
-      background: white;
-      clip-path: circle();
-      height: 2rem;
-      //   width: 2rem;
+    .profile-container {
+      // display: grid;
+      // grid-template-columns: 5rem 4rem;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      cursor: pointer;
-      transition: background 0.2s;
 
-      img {
-        width: 100%;
-        height: 1.4rem;
+      .profile {
+        background-color: white;
+        clip-path: circle();
+        height: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        img {
+          width: 100%;
+          height: 1.4rem;
+        }
       }
-    }
-    .profil:hover {
-      background: #58e0b7;
+      .profile:hover {
+        background: #58e0b7;
+      }
+
+      .role-container {
+        color: black;
+
+
+        .display-role{
+        }
+      }
     }
 
     .cart {
@@ -87,12 +120,12 @@ header {
 
       .display {
         padding: 0.7rem;
-        background: white;
+        background-color: white;
         clip-path: circle();
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: background 0.2s;
+        transition: background-color 0.2s;
         p {
           font-weight: 800;
           color: black;
