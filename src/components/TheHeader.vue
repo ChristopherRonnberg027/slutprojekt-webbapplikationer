@@ -8,7 +8,7 @@
     <section class="access">
       <div class="profile-container">
         <div class="role-container" v-if="user">
-          <p class="display-role" ><strong>User: {{user.user.name}} role: {{user.user.role}}</strong></p>
+          <p class="display-role" ><strong>User: {{user.name}} role: {{user.role}}</strong></p>
         </div>
 
         <div class="profile" @click="accessProfile()">
@@ -19,7 +19,7 @@
       <div class="cart" @click="accessCart()">
         <img src="../assets/icon-bag-black.svg" alt />
         <div class="display">
-          <p v-if="getItemQuantity()" v-text="getItemQuantity()"></p>
+          <p v-text="getItemQuantity()"></p>
         </div>
       </div>
 
@@ -36,8 +36,7 @@ export default {
   },
   methods: {
     getItemQuantity() {
-      return 7;
-      // return this.$store.getters.getCartLength();
+      return this.$store.state.cart.length;
     },
     accessProfile() {
       if (this.$store.state.user) {

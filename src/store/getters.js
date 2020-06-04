@@ -1,3 +1,5 @@
 export const getCartLength = (state) => {
-    return state.cart.length;
+    console.log(state)
+    return 6;
+    // return state.cart.length;
 }

@@ -13,3 +13,13 @@ export const register = async function (context, newUser) {
         context.commit('setUser', user);
     }
 }
+
+export const getProducts = async function (context) {
+    let products = await API.getAllProducts();
+    context.commit('setProducts', products);
+}
+
+export const getProduct = async function (context, id) {
+    let product = await API.getSingleProduct(id);
+    context.commit('setProduct', product);
+}

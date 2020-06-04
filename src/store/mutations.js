@@ -3,5 +3,15 @@ export const addToCart = (state, payload) => {
 }
 
 export const setUser = (state, user) => {
-    state.user = user;
+    state.user = user.user;
+    state.token = user.token;
 }
+
+export const setProducts = (state, products) => {
+    state.products = products;
+}
+
+export const setProduct = (state, product) => {
+    state.product = product;
+}
+
