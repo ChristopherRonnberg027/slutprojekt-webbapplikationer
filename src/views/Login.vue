@@ -17,14 +17,17 @@ export default {
   data() {
     return {
       userCredentials: {
-        email: '',
-        password: ''
+        email: 'customer@example.com',
+        password: 'password'
       }
     }
   },
   methods: {
-    submit() {
-      this.$store.dispatch('login', this.userCredentials);
+    async submit() {
+      await this.$store.dispatch('login', this.userCredentials);
+      if(this.$store.state.user){
+        this.$router.push({name: 'MyAccount'});
+      }
     },
     register() {
       this.$router.push({name: 'Register'});

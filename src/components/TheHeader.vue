@@ -48,7 +48,7 @@ export default {
       }
     },
     accessCart() {
-      console.log("TO CART/CHECKOUT");
+      this.$router.push('/shoppingcart')
     }
   }
 };
