@@ -1,19 +1,24 @@
 <template>
   <div id="app">
-    <the-header />
-    <the-navigation />
+    <div>
+      <the-header />
+      <the-navigation />
+    </div>
     <router-view/>
+    <contact-info/>
   </div>
 </template>
 
 <script>
 import TheHeader from '@/components/TheHeader'
 import TheNavigation from '@/components/TheNavigation'
+import ContactInfo from '@/components/ContactInfo'
 
 export default {
   components: {
     TheHeader,
-    TheNavigation
+    TheNavigation,
+    ContactInfo
   }
   
 }
@@ -24,5 +29,12 @@ export default {
   margin: 0;
   padding: 0;
   line-height: 1.6;
+}
+
+#app{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>
