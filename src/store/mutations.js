@@ -21,6 +21,10 @@ export const removeFromCart = (state, product) => {
     }
 }
 
+export const clearCart = (state) => {
+    state.cart = []
+} 
+
 export const setUser = (state, user) => {
     state.user = user.user;
     state.token = user.token;
