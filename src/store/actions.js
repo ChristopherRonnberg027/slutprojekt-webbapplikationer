@@ -27,3 +27,15 @@ export const getProduct = async function (context, id) {
 export const logout = function (context) {
     context.commit('logout');
 }
+
+export const addToCart = function (context, product) {
+    context.commit('addToCart', product);
+}
+
+export const removeFromCart = function (context, product) {
+    context.commit('removeFromCart', product);
+}
+
+export const createOrder = async function (context, newOrder) {
+    await API.createOrder(newOrder, context.state.token);
+}
