@@ -38,14 +38,11 @@ export default {
       return this.$store.state.user;
     },
     orders() {
-      // return this.user.orders;
-      return [
-        {_id: 1, timeStamp: Date.now(), status: 'Delivered', items: [11,12,13], orderValue: 700},
-        {_id: 2, timeStamp: Date.now(), status: 'Delayed', items: [22,22,33], orderValue: 700},
-        {_id: 3, timeStamp: Date.now(), status: 'In transit', items: [44,55,66], orderValue: 700},
-        {_id: 4, timeStamp: Date.now(), status: '', items: [77,88,99], orderValue: 700},
-      ]
+      return this.$store.state.user.orders;
     }
+  },
+  beforeCreate() {
+    this.$store.dispatch('getOrders');
   }
 };
 </script>

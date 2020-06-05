@@ -30,6 +30,10 @@ export const setUser = (state, user) => {
     state.token = user.token;
 }
 
+export const setUserOrderHistory = (state, orderHistory) => {
+    state.user.orders = orderHistory;
+}
+
 export const setProducts = (state, products) => {
     state.products = products;
 }
