@@ -10,13 +10,6 @@
       <div class="logo-container">
         <img src="@/assets/sinus-logo.svg" alt />
       </div>
-      <section class="contact-info">
-        <h3>Contact</h3>
-        <p>High Street 1</p>
-        <p>PO Box 1337</p>
-        <p>City 17</p>
-        <p>Weytani CORP</p>
-      </section>
     </footer>
   </div>
 </template>
@@ -51,11 +44,6 @@ export default {
       img {
         width: 100%;
       }
-    }
-    .contact-info{
-      padding: 2rem;
-      background-color:black;
-      color: white;
     }
   }
 }
