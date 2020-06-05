@@ -5,9 +5,9 @@
             <p class="price">{{cartItem.product.price}} :-</p>
         </section>
         <section class="quantity-btn">
-            <p class="btn">&and;</p>
+            <p class="btn" @click="addToCart()">&and;</p>
             <p class="quantity">{{cartItem.quantity}}</p>
-            <p class="btn">&or;</p>
+            <p class="btn" @click="removeFromCart()">&or;</p>
         </section>
     </article>
 </template>

@@ -16,7 +16,7 @@ export const removeFromCart = (state, product) => {
     cartItemInCart.quantity -= 1;
     if (cartItemInCart.quantity === 0) {
         state.cart = state.cart.filter(cartItem => {
-            return cartItem._id != cartItemInCart._id;
+            return cartItem.product._id != cartItemInCart.product._id;
         });
     }
 }
