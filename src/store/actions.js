@@ -38,4 +38,5 @@ export const removeFromCart = function (context, product) {
 
 export const createOrder = async function (context, newOrder) {
     await API.createOrder(newOrder, context.state.token);
+    context.commit('clearCart');
 }

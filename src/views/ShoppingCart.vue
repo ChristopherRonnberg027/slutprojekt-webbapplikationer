@@ -35,6 +35,7 @@ export default {
                 }
             }
             this.$store.dispatch("createOrder", { items: this.items });
+            this.$router.push('/checkout')
         }
     }
 };
