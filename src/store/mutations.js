@@ -5,7 +5,7 @@ export const addToCart = (state, product) => {
     if (cartItemInCart) {
         cartItemInCart.quantity += 1;
     } else {
-        state.cart.push({quantity: 1, product: product})
+        state.cart.push({ quantity: 1, product: product })
     }
 }
 
@@ -23,11 +23,24 @@ export const removeFromCart = (state, product) => {
 
 export const clearCart = (state) => {
     state.cart = []
-} 
+}
 
 export const setUser = (state, user) => {
     state.user = user.user;
     state.token = user.token;
+}
+
+export const addNewProduct = (state, newProduct) => {
+    state.products.push(newProduct)
+}
+
+export const editProduct = (state, editedProduct) => {
+    let oldProductIndex = state.products.findIndex(product => product._id === editedProduct._id)
+    state.products[oldProductIndex] = editedProduct
+}
+
+export const deleteProduct = (state, id) => {
+    state.products = state.products.filter(product => product._id !== id)
 }
 
 export const setUserOrderHistory = (state, orderHistory) => {

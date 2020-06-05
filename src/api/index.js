@@ -16,7 +16,7 @@ async function login(userCredentials) {
     }
 }
 
-async function register(user){
+async function register(user) {
     let response = await fetch(URL + '/register', {
         method: 'POST',
         headers: {
@@ -27,7 +27,7 @@ async function register(user){
     if (response.status === 400) {
         return null
     } else {
-        return login({email: user.email, password: user.password});
+        return login({ email: user.email, password: user.password });
     }
 
 }
@@ -44,56 +44,58 @@ async function getSingleProduct(id) {
     return singleProduct
 }
 
-async function createProduct(product, token){
-    await fetch(URL+ '/products/',{
+async function createProduct(product, token) {
+    let response = await fetch(URL + '/products/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+token
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(product)
     })
+    let data = await response.json()
+    return data.product
 }
-async function editProduct(product, token){
-    await fetch(URL+ '/products/' + product._id,{
+async function editProduct(product, token) {
+    await fetch(URL + '/products/' + product._id, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+token
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(product)
     })
 }
-async function deleteProduct(product, token){
-    await fetch(URL+ '/products/' + product._id,{
+async function deleteProduct(product, token) {
+    await fetch(URL + '/products/' + product._id, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+token
+            'Authorization': 'Bearer ' + token
         },
     })
 }
-async function getOrders(token){
-    let response=await fetch(URL+ '/orders',{
+async function getOrders(token) {
+    let response = await fetch(URL + '/orders', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+token
+            'Authorization': 'Bearer ' + token
         },
     })
     let orders = await response.json()
     return orders
 }
-async function createOrder(order,token){
-    await fetch(URL+ '/orders',{
+async function createOrder(order, token) {
+    await fetch(URL + '/orders', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+token
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(order)
     })
 }
 
-export default {login,register, getAllProducts,getSingleProduct,createProduct,editProduct,deleteProduct,getOrders,createOrder}
+export default { login, register, getAllProducts, getSingleProduct, createProduct, editProduct, deleteProduct, getOrders, createOrder }
 
