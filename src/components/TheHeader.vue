@@ -25,6 +25,7 @@
       <strong>{{user.name}}</strong> | Role:
       <strong>{{user.role}}</strong>
     </p>
+    <p v-else class="display-role" >Logg in to buy shit</p>
   </header>
 </template>
 
@@ -69,7 +70,7 @@ export default {
   background-color: #c4c4c4;
   @include flex-center-space;
 
-  padding: 2rem 1rem 0.5rem 1rem;
+  padding: 2rem 1rem 0rem 1rem;
 
   .logo {
     @include flex-content-center;
@@ -133,6 +134,6 @@ export default {
 .display-role {
   padding-right: 1.4rem;
   text-align: right;
-  background-color: #58e0b7;
+  background-color: #c4c4c4;
 }
 </style>
