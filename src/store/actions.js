@@ -36,6 +36,20 @@ export const removeFromCart = function (context, product) {
     context.commit('removeFromCart', product);
 }
 
+export const createProduct = async function (context, product) {
+    let createdProduct = await API.createProduct(product, context.state.token)
+    context.commit('addNewProduct', createdProduct)
+}
+export const editProduct = async function (context, product) {
+    await API.editProduct(product, context.state.token)
+    context.commit('editProduct', product)
+
+}
+export const deleteProduct = async function (context, product) {
+    await API.deleteProduct(product._id, context.state.token)
+    context.commit('deleteProduct', product._id)
+}
+
 export const createOrder = async function (context, newOrder) {
     await API.createOrder(newOrder, context.state.token);
     context.commit('clearCart');
