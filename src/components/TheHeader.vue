@@ -1,38 +1,40 @@
 <template>
   <header>
-    
-    <section class="logo">
-      <img src="../assets/sinus-logo.svg" alt />
-    </section>
+    <div class="wrapper">
+      <section class="logo">
+        <img src="../assets/sinus-logo.svg" alt />
+      </section>
 
-    <section class="access">
-      <div class="profile-container">
-        <div class="role-container" v-if="user">
-          <p class="display-role" ><strong>User: {{user.name}} role: {{user.role}}</strong></p>
-        </div>
-
+      <section class="access">
         <div class="profile" @click="accessProfile()">
           <img src="../assets/icon-user-black.svg" alt />
         </div>
-      </div>
 
-      <div class="cart" @click="accessCart()">
-        <img src="../assets/icon-bag-black.svg" alt />
-        <div class="display">
-          <p v-text="getItemQuantity()"></p>
+        <div class="cart" @click="accessCart()">
+          <img src="../assets/icon-bag-black.svg" alt />
+
+          <div class="display">
+            <p v-text="getItemQuantity()"></p>
+          </div>
         </div>
-      </div>
+      </section>
+    </div>
 
-    </section>
+    <p class="display-role" v-if="user">
+      Logged in:
+      <strong>{{user.name}}</strong> | Role:
+      <strong>{{user.role}}</strong>
+    </p>
+    <p v-else class="display-role" >Logg in to buy shit</p>
   </header>
 </template>
 
 <script>
 export default {
-  computed:{
-    user(){
+  computed: {
+    user() {
       return this.$store.state.user;
-    }  
+    }
   },
   methods: {
     getItemQuantity() {
@@ -47,95 +49,91 @@ export default {
     },
     accessCart() {
       console.log("TO CART/CHECKOUT");
-    },
-    userLog() {
-      return ;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-header {
-  background-color: #c4c4c4;
+@mixin flex-content-center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-center-space {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+}
+
+.wrapper {
+  background-color: #c4c4c4;
+  @include flex-center-space;
+
+  padding: 2rem 1rem 0rem 1rem;
+
   .logo {
-    display: flex;
-    justify-content: center;
+    @include flex-content-center;
     img {
       height: 3rem;
     }
   }
 
   .access {
-    max-width: 12rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 1rem;
 
-    .profile-container {
-      // display: grid;
-      // grid-template-columns: 5rem 4rem;
+    .profile {
+      background-color: none;
+      clip-path: circle();
       display: flex;
-      justify-content: space-between;
       align-items: center;
-
-      .profile {
-        background-color: white;
-        clip-path: circle();
-        height: 2rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        transition: background-color 0.2s;
-
-        img {
-          width: 100%;
-          height: 1.4rem;
-        }
-      }
-      .profile:hover {
-        background: #58e0b7;
-      }
-
-      .role-container {
-        color: black;
-
-
-        .display-role{
-        }
-      }
-    }
-
-    .cart {
-      padding-top: 0.5rem;
-      display: grid;
-      grid-template-rows: 1rem 1rem;
       cursor: pointer;
+      transition: background-color 0.2s;
 
-      .display {
-        padding: 0.7rem;
-        background-color: white;
-        clip-path: circle();
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: background-color 0.2s;
-        p {
-          font-weight: 800;
-          color: black;
-        }
+      img {
+        width: 2rem;
+        height: 100%;
       }
     }
-    .cart:hover {
-      .display {
-        background: #58e0b7;
+
+    .profile:hover {
+      background: #58e0b7;
+    }
+
+    .display-role {
+      color: black;
+    }
+  }
+
+  .cart {
+    display: grid;
+    grid-template-rows: 1rem 1rem;
+    cursor: pointer;
+
+    .display {
+      padding: 0.7rem;
+      background-color: white;
+      clip-path: circle();
+      display: flex;
+      align-items: center;
+      transition: background-color 0.2s;
+      p {
+        font-weight: 800;
+        color: black;
       }
     }
   }
+  .cart:hover {
+    .display {
+      background: #58e0b7;
+    }
+  }
+}
+.display-role {
+  padding-right: 1.4rem;
+  text-align: right;
+  background-color: #c4c4c4;
 }
 </style>
