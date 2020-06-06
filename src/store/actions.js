@@ -45,9 +45,9 @@ export const editProduct = async function (context, product) {
     context.commit('editProduct', product)
 
 }
-export const deleteProduct = async function (context, product) {
-    await API.deleteProduct(product._id, context.state.token)
-    context.commit('deleteProduct', product._id)
+export const deleteProduct = async function (context, id) {
+    await API.deleteProduct(id, context.state.token)
+    context.commit('deleteProduct', id)
 }
 
 export const createOrder = async function (context, newOrder) {
