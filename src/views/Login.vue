@@ -1,14 +1,23 @@
 <template>
   <main>
-    <h1>log in to buy</h1>
-    <section>
-      <p>email</p>
-      <input v-model="userCredentials.email" type="text">
-      <p>password</p>
-      <input v-model="userCredentials.password" type="text">
-      <button @click="submit()">log in</button>
-      <button @click="register()" class="register">register</button>
-    </section>
+    <h1 class="ma-5">log in to buy</h1>
+    <v-container>
+      <v-form ref="form" lazy-validation>
+        <v-text-field
+          v-model="userCredentials.email"
+          label="Email"
+          prepend-icon="contact_mail">
+          </v-text-field>
+        <v-text-field
+          v-model="userCredentials.password"
+          :append-icon="show1 ? 'visibility' : 'visibility_off'"
+          :type="show1 ? 'text' : 'password'"
+          @click:append="toggleShow()"
+          label="Password" prepend-icon="lock">
+          </v-text-field>
+        <v-btn @click="submit()" :loading="isLoading">Login</v-btn>
+      </v-form>
+    </v-container>
   </main>
 </template>
 
@@ -16,6 +25,8 @@
 export default {
   data() {
     return {
+      isLoading: false,
+      show1: false,
       userCredentials: {
         email: 'customer@example.com',
         password: 'password'
@@ -23,8 +34,13 @@ export default {
     }
   },
   methods: {
+    toggleShow() {
+      this.show1 = !this.show1;
+    },
     async submit() {
+      this.isLoading = true;
       await this.$store.dispatch('login', this.userCredentials);
+      this.isLoading = false;
       if(this.$store.state.user){
         this.$router.push({name: 'MyAccount'});
       }
@@ -38,29 +54,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h1 {
-    margin: 4rem 0;
-  }
-
-  section {
-    input {
-      margin-bottom: 2rem;
-    }
-
-    button {
-      display: block;
-      width: 100%;
-    }
-
-    .register {
-      margin-top: 3rem;
-    }
-  }
-}
 
 </style>

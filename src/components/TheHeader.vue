@@ -20,12 +20,12 @@
       <p class="d-none d-xl-flex">xl</p>
       <v-spacer></v-spacer>
       <v-btn class="mr-5" @click="accessProfile()">
+        <v-icon>person</v-icon>
         <span>My Account</span>
-        <v-icon class="ml-1">person</v-icon>
       </v-btn>
       <v-btn @click="accessCart()">
+        <v-icon>shopping_cart</v-icon>
         <span>Shopping Cart</span>
-        <v-icon class="ml-1">shopping_cart</v-icon>
       </v-btn>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" app>
@@ -51,8 +51,8 @@ export default {
     return {
       drawer: false,
       links: [
-        {icon: 'dashboard', text: 'Home', route:'/'},
-        {icon: 'folder', text: 'Products', route:'/products'},
+        {icon: 'home', text: 'Home', route:'/'},
+        {icon: 'shopping_basket', text: 'Products', route:'/products'},
       ]
     }
   },
