@@ -1,22 +1,39 @@
 <template>
   <main class="products">
-    <h1>CHECK OUT OUR PRODUCTS</h1>
-    <section class="product-list">
-      <product v-for="(singleProduct,i) in productList" :key="i" :product="singleProduct" />
-    </section>
+    <h1 class="ma-5">CHECK OUT OUR PRODUCTS</h1>
+    <v-container>
+      <v-row justify="start">
+        <v-col cols="12" sm="6" md="4" lg="3" v-for="product in products" :key="product._id">
+          <v-card>
+            <v-img router :to="'/products/'+product._id" contain :src="require('@/assets/'+product.imgFile)"></v-img>
+            <v-card-title>{{product.title}}</v-card-title>
+            <v-card-subtitle>{{product.shortDesc}}</v-card-subtitle>
+            <v-card-text>{{product.price}}</v-card-text>
+            <v-card-actions>
+              <v-btn @click="addToCart(product)">
+                <v-icon class="mr-1">add_shopping_cart</v-icon>
+                <span>Add to cart</span>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </main>
 </template>
 
 <script>
-import Product from "@/components/Product";
+
 export default {
   name: "Products",
-  components: {
-    Product
-  },
   computed: {
-    productList() {
+    products() {
       return this.$store.state.products;
+    }
+  },
+  methods: {
+    addToCart(product) {
+      this.$store.dispatch('addToCart', product);
     }
   },
   beforeCreate() {
@@ -26,19 +43,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.products {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 70vw;
-  h1 {
-    text-align: center;
-  }
-  .product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-    gap: 3rem;
-    margin: 2rem 0;
-  }
-}
+
 </style>

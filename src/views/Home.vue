@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <!-- <div class="home">
     <div class="intro">
       <h1>Skate! Don't hate!</h1>
       <div class="img-container">
@@ -11,7 +11,10 @@
         <img src="@/assets/sinus-logo.svg" alt />
       </div>
     </footer>
-  </div>
+  </div> -->
+  <main>
+    <h1 class="ma-5">Skate, don't hate!</h1>
+  </main>
 </template>
 
 <script>
