@@ -11,6 +11,7 @@ export default {
       links: [
         {text: 'Home', route:'/'},
         {text: 'Products', route:'/products'},
+        {text: 'Admin', route:'/admin'}
       ]
     }
   }
