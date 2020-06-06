@@ -1,19 +1,6 @@
 <template>
-  <!-- <div class="home">
-    <div class="intro">
-      <h1>Skate! Don't hate!</h1>
-      <div class="img-container">
-        <img src="@/assets/skate-hero-1.jpg" alt />
-      </div>
-    </div>
-    <footer>
-      <div class="logo-container">
-        <img src="@/assets/sinus-logo.svg" alt />
-      </div>
-    </footer>
-  </div> -->
   <main>
-    <h1 class="ma-5">Skate, don't hate!</h1>
+      <v-img width="100%" src="@/assets/skate-hero-1.jpg"><h1 class="display-4 ma-12">Skate, don't hate!</h1></v-img>
   </main>
 </template>
 
