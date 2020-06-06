@@ -1,42 +1,70 @@
 <template>
   <header>
-    <div class="wrapper">
-      <section class="logo">
-        <img src="../assets/sinus-logo.svg" alt />
-      </section>
-
-      <section class="access">
-        <div class="profile" @click="accessProfile()">
-          <img src="../assets/icon-user-black.svg" alt />
-        </div>
-
-        <div class="cart" @click="accessCart()">
-          <img src="../assets/icon-bag-black.svg" alt />
-
-          <div class="display">
-            <p v-text="getItemQuantity()"></p>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <p class="display-role" v-if="user">
-      Logged in:
-      <strong>{{user.name}}</strong> | Role:
-      <strong>{{user.role}}</strong>
-    </p>
-    <p v-else class="display-role" >Logg in to buy shit</p>
+    <v-app-bar app>
+      <v-app-bar-nav-icon @click="toggleDrawer()"></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        <v-img max-height="4rem" contain src="../assets/sinus-logo.svg"></v-img>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <div v-if="user">
+      <span class="mr-2 font-weight-bold">User:</span>
+      <span class="mr-5">{{user.name}}</span>
+      <span class="mr-2 font-weight-bold">Role:</span>
+      <span>{{user.role}}</span>
+      </div>
+      <v-spacer></v-spacer>
+      <p class="d-flex d-sm-none">xs</p>
+      <p class="d-none d-sm-flex d-md-none">sm</p>
+      <p class="d-none d-md-flex d-lg-none">md</p>
+      <p class="d-none d-lg-flex d-xl-none">lg</p>
+      <p class="d-none d-xl-flex">xl</p>
+      <v-spacer></v-spacer>
+      <v-btn class="mr-5" @click="accessProfile()">
+        <span>My Account</span>
+        <v-icon class="ml-1">person</v-icon>
+      </v-btn>
+      <v-btn @click="accessCart()">
+        <span>Shopping Cart</span>
+        <v-icon class="ml-1">shopping_cart</v-icon>
+      </v-btn>
+    </v-app-bar>
+    <v-navigation-drawer v-model="drawer" app>
+      <v-list>
+        <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
+          <v-list-item-action>
+            <v-btn icon>
+              <v-icon>{{link.icon}}</v-icon>
+            </v-btn>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>{{link.text}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </header>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      drawer: false,
+      links: [
+        {icon: 'dashboard', text: 'Home', route:'/'},
+        {icon: 'folder', text: 'Products', route:'/products'},
+      ]
+    }
+  },
   computed: {
     user() {
       return this.$store.state.user;
     }
   },
   methods: {
+    toggleDrawer() {
+      this.drawer = !this.drawer
+    },
     getItemQuantity() {
       return this.$store.state.cart.length;
     },
@@ -48,92 +76,11 @@ export default {
       }
     },
     accessCart() {
-      this.$router.push('/shoppingcart')
+      this.$router.push("/shoppingcart");
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@mixin flex-content-center {
-  display: flex;
-  justify-content: center;
-}
-
-@mixin flex-center-space {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.wrapper {
-  background-color: #c4c4c4;
-  @include flex-center-space;
-
-  padding: 2rem 1rem 0rem 1rem;
-
-  .logo {
-    @include flex-content-center;
-    img {
-      height: 3rem;
-    }
-  }
-
-  .access {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-gap: 1rem;
-
-    .profile {
-      background-color: none;
-      clip-path: circle();
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      transition: background-color 0.2s;
-
-      img {
-        width: 2rem;
-        height: 100%;
-      }
-    }
-
-    .profile:hover {
-      background: #58e0b7;
-    }
-
-    .display-role {
-      color: black;
-    }
-  }
-
-  .cart {
-    display: grid;
-    grid-template-rows: 1rem 1rem;
-    cursor: pointer;
-
-    .display {
-      padding: 0.7rem;
-      background-color: white;
-      clip-path: circle();
-      display: flex;
-      align-items: center;
-      transition: background-color 0.2s;
-      p {
-        font-weight: 800;
-        color: black;
-      }
-    }
-  }
-  .cart:hover {
-    .display {
-      background: #58e0b7;
-    }
-  }
-}
-.display-role {
-  padding-right: 1.4rem;
-  text-align: right;
-  background-color: #c4c4c4;
-}
 </style>
