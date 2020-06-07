@@ -11,3 +11,7 @@ export const cartTotalPrice = (state) => {
     });
     return total;
   }
+
+export const productById = (state) => (id) => {
+  return state.products.find(product => product._id==id)
+}
