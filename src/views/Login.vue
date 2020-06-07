@@ -63,6 +63,7 @@ export default {
         await this.$store.dispatch("login", this.userCredentials);
         this.isLoading = false;
         if (this.$store.state.user) {
+          await this.$store.dispatch("getOrders");
           this.$router.push({ name: "MyAccount" });
         }
       }

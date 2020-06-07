@@ -68,8 +68,9 @@ export default {
     getItemQuantity() {
       return this.$store.state.cart.length;
     },
-    accessProfile() {
+    async accessProfile() {
       if (this.$store.state.user) {
+        await this.$store.dispatch("getOrders");
         this.$router.push({ name: "MyAccount" });
       } else {
         this.$router.push({ name: "Login" });

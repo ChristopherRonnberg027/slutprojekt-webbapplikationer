@@ -92,9 +92,6 @@ export default {
       return this.$store.state.user.orders;
     }
   },
-  beforeCreate() {
-    this.$store.dispatch("getOrders");
-  }
 };
 </script>
 
