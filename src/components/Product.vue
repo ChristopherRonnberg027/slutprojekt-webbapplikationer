@@ -1,94 +1,38 @@
 <template>
-    <article class="product">
-        <router-link :to="'/products/'+product._id" :class="['image-container',{'single-product':singleProduct}]">
-            <img :src="require('@/assets/'+product.imgFile)" alt />
-        </router-link>
-
-        <div class="product-info">
-            <div class="title-price">
-                <p class="title">{{product.title}}</p>
-                <p class="price">{{product.price}} kr</p>
-            </div>
-            <div class="desc-buy">
-                <p class="short-desc">{{product.shortDesc}}</p>
-                <p class="buy" @click="addToCart">Add to Cart</p>
-            </div>
-        </div>
-    </article>
+  <v-card>
+    <v-img max-height="460" contain :src="require('@/assets/'+product.imgFile)" />
+    <v-card-title>{{product.title}}</v-card-title>
+    <v-card-subtitle>{{product.shortDesc}}</v-card-subtitle>
+    <v-card-subtitle v-if="singleProduct">{{product.category}}</v-card-subtitle>
+    <v-card-subtitle v-if="singleProduct">{{product.longDesc}}</v-card-subtitle>
+    <v-card-text>{{product.price}}</v-card-text>
+    <v-card-actions>
+      <v-btn @click="addToCart()">
+        <v-icon class="mr-1">add_shopping_cart</v-icon>
+        <span>Add to cart</span>
+      </v-btn>
+      <v-btn v-if="!singleProduct" router :to="'/products/'+product._id">
+        <v-icon>search</v-icon>
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
 export default {
-    name: "Product",
-    props: {
-        product: Object,
-        singleProduct:Boolean
-    },
-    methods: {
-        addToCart() {
-            this.$store.dispatch("addToCart", this.product);
-        }
+  name: "Product",
+  props: {
+    product: Object,
+    singleProduct: Boolean
+  },
+  methods: {
+    addToCart() {
+      this.$store.dispatch("addToCart", this.product);
     }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@mixin flex-column {
-    display: flex;
-    flex-direction: column;
-}
-@mixin flex-row {
-    display: flex;
-    justify-content: space-between;
-}
-@mixin flex-row-end {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
 
-.product {
-    font-size: 1.4rem;
-    @include flex-column;
-
-    .image-container {
-        border-radius: 5px;
-        background-color: #c4c4c4;
-        padding: 1rem 2rem 0;
-        @include flex-row-end;
-        min-height: 21rem;
-
-        img {
-            object-fit: cover;
-            width: 18rem;
-        }
-    }    
-    .single-product{
-        min-height: 30vw;
-        img {
-            width: 100%;
-        }
-    }
-    .product-info {
-        @include flex-column;
-        .title-price,
-        .desc-buy {
-            @include flex-row;
-            .buy {
-                background: #58e0b7;
-                border: 1px solid #000000;
-                padding: 0 1rem;
-                border-radius: 5px;
-                &:hover {
-                    cursor: pointer;
-                    background: cornflowerblue;
-                }
-            }
-        }
-        .title,
-        .buy {
-            font-weight: bold;
-        }
-    }
-}
 </style>
