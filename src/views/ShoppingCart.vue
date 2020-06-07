@@ -3,7 +3,25 @@
     <h1 class="ma-5">Shopping cart</h1>
     <v-container>
       <v-card class="my-5" v-for="cartItem in cart" :key="cartItem.product._id">
-        <cart-item :cartItem="cartItem" />
+        <v-row justify="space-around">
+          <v-col cols="4">
+            <v-card-text>
+              <v-card-title>{{cartItem.product.title}}</v-card-title>
+              <v-card-subtitle>{{cartItem.product.price}}</v-card-subtitle>
+            </v-card-text>
+          </v-col>
+          <v-col cols="4">
+            <v-card-actions class="flex-column">
+              <v-btn @click="addToCart(cartItem.product)" depressed small>
+                <v-icon>keyboard_arrow_up</v-icon>
+              </v-btn>
+              <span>{{cartItem.quantity}}</span>
+              <v-btn @click="removeFromCart(cartItem.product)" depressed small>
+                <v-icon>keyboard_arrow_down</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-col>
+        </v-row>
       </v-card>
       <v-btn @click="createOrder()">Checkout</v-btn>
     </v-container>
@@ -11,13 +29,9 @@
 </template>
 
 <script>
-import CartItem from "@/components/CartItem";
-
 export default {
   name: "ShoppingCart",
-  components: {
-    CartItem
-  },
+  components: {},
   data() {
     return {
       items: []
@@ -32,6 +46,12 @@ export default {
     }
   },
   methods: {
+    addToCart(product) {
+      this.$store.dispatch("addToCart", product);
+    },
+    removeFromCart(product) {
+      this.$store.dispatch("removeFromCart", product);
+    },
     createOrder() {
       if (this.$store.state.user) {
         for (const cartItem of this.cart) {
@@ -50,5 +70,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>
