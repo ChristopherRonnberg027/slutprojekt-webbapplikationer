@@ -6,6 +6,10 @@
       </section>
 
       <section class="access">
+        <div class="admin" @click="accessAdminArea()" v-if="user && user.role === 'admin'">
+          <img src="../assets/icon-edit-white.svg" alt />
+        </div>
+
         <div class="profile" @click="accessProfile()">
           <img src="../assets/icon-user-black.svg" alt />
         </div>
@@ -25,7 +29,7 @@
       <strong>{{user.name}}</strong> | Role:
       <strong>{{user.role}}</strong>
     </p>
-    <p v-else class="display-role" >Logg in to buy shit</p>
+    <p v-else class="display-role">Logg in to buy shit</p>
   </header>
 </template>
 
@@ -48,7 +52,11 @@ export default {
       }
     },
     accessCart() {
-      this.$router.push('/shoppingcart')
+      this.$router.push("/shoppingcart");
+    },
+    accessAdminArea(){
+      //this.$router.push("/admin");
+      console.log('Not active')
     }
   }
 };
@@ -81,11 +89,29 @@ export default {
 
   .access {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     grid-gap: 1rem;
 
+    .admin {
+      padding: .5rem;
+      background-color: black;
+      clip-path: circle();
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      img {
+        width: 1rem;
+        height: 100%;
+      }
+    }
+    .admin:hover {
+      background: #58e0b7;
+    }
+
     .profile {
-      background-color: none;
+      padding: .3rem;
+      background-color: white;
       clip-path: circle();
       display: flex;
       align-items: center;
@@ -93,7 +119,7 @@ export default {
       transition: background-color 0.2s;
 
       img {
-        width: 2rem;
+        width: 1.5rem;
         height: 100%;
       }
     }
