@@ -91,14 +91,35 @@ export default {
   @include flex-column;
   .input {
     @include flex-row;
+    align-items: center;
     p {
       flex: 2;
     }
     input[type="text"],
     input[type="number"],
     select {
+      background: #E2E2E2;
+      border: none;
+      padding: 1rem;
       margin-left: 1rem;
       flex: 8;
+    }
+  }
+}
+@media screen and (max-width: 448px) {
+  .wrapper .container .product {
+    .input {
+      p{
+        padding-bottom:0.2rem;
+      }
+      @include flex-column;
+      align-items: flex-start;
+      margin: 0 0.5rem 1rem;
+      input[type="text"],
+      input[type="number"],
+      select {
+        margin-left: 0;
+      }
     }
   }
 }
