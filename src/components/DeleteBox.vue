@@ -1,12 +1,15 @@
 <template>
   <div class="overlay">
     <div class="delete-box">
-      <h2>
+      <img class="cancel" @click="toggleDeleteBox()" src="@/assets/close.svg" alt />
+      <p class="message">
         Confirm removal of
-        Product {{ productToDelete.title}}??
-      </h2>
-      <button v-on:click="deleteProduct(productToDelete._id)">Yes</button>
-      <button v-on:click="toggleDeleteBox()">Cancel</button>
+        <strong>{{productToDelete.title}}</strong>?
+      </p>
+      <div class="buttons">
+        <button class="no" @click="toggleDeleteBox()">Cancel</button>
+        <button class="yes" @click="deleteProduct(productToDelete._id)">Yes</button>
+      </div>
     </div>
   </div>
 </template>
@@ -20,10 +23,10 @@ export default {
   methods: {
     deleteProduct(id) {
       this.$store.dispatch("deleteProduct", id);
-      this.toggleDeleteBox()
+      this.toggleDeleteBox();
     },
-    toggleDeleteBox(){
-        this.$emit('toggle')
+    toggleDeleteBox() {
+      this.$emit("toggle");
     }
   }
 };
@@ -39,12 +42,49 @@ export default {
   left: 0;
   .delete-box {
     position: relative;
-    width: 300px;
-    background: lightgray;
-    border: 2px solid gray;
-    top: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40vw;
+    max-height: 50vh;
+    padding: 2rem;
+    background: #f2f2f2;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    .cancel {
+      align-self: flex-start;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .message {
+      font-size: 2rem;
+      align-self: center;
+      margin-bottom: 3rem;
+      padding: 5vw;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      .no,
+      .yes {
+        border: 2px solid #000000;
+        box-sizing: border-box;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 0 1rem;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .no {
+        background-color: #fb8383;
+      }
+      .yes {
+        background-color: #83fbe5;
+      }
+    }
   }
 }
 </style>
