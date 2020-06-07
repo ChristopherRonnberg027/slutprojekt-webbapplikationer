@@ -3,14 +3,14 @@
     <h1 class="ma-5">Shopping cart</h1>
     <v-container>
       <v-card class="my-5" v-for="cartItem in cart" :key="cartItem.product._id">
-        <v-row justify="space-around">
+        <v-row justify="space-between">
           <v-col cols="4">
             <v-card-text>
               <v-card-title>{{cartItem.product.title}}</v-card-title>
               <v-card-subtitle>{{cartItem.product.price}}</v-card-subtitle>
             </v-card-text>
           </v-col>
-          <v-col cols="4">
+          <v-col cols="2">
             <v-card-actions class="flex-column">
               <v-btn @click="addToCart(cartItem.product)" depressed small>
                 <v-icon>keyboard_arrow_up</v-icon>

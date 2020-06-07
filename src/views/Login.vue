@@ -23,6 +23,7 @@
               :type="show1 ? 'text' : 'password'"
             ></v-text-field>
             <v-btn @click="submit()" :loading="isLoading">Login</v-btn>
+            <v-btn class="mx-3" @click="register()">Register</v-btn>
           </v-form>
         </v-col>
       </v-row>

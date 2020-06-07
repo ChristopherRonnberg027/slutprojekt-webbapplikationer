@@ -38,23 +38,40 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-expansion-panels class="my-10">
-        <v-expansion-panel v-for="order in orders" :key="order._id">
-          <v-expansion-panel-header>Order id: {{order._id}}</v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <v-card flat>
-              <v-card-text class="text--primary">
-                <p><b>Date:</b> {{new Date(order.timeStamp)}}</p>
-                <p><b>Status:</b> {{order.status}}</p>
-                <p><b>Total sum:</b> {{order.orderValue}}</p>
-                <p v-for="item in order.items" :key="item.id">
-                  <span><b>Item id:</b> {{item}}</span>
-                </p>
-              </v-card-text>
-            </v-card>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
+      <v-card flat>
+        <v-card-text>
+          <v-card-title class="headline text--primary">User orders</v-card-title>
+          <v-expansion-panels class="my-10">
+            <v-expansion-panel v-for="order in orders" :key="order._id">
+              <v-expansion-panel-header><span><b>Order id:</b> {{order._id}}</span></v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-card flat>
+                  <v-card-text class="text--primary">
+                    <p>
+                      <b>Date:</b>
+                      {{new Date(order.timeStamp)}}
+                    </p>
+                    <p>
+                      <b>Status:</b>
+                      {{order.status}}
+                    </p>
+                    <p>
+                      <b>Total sum:</b>
+                      {{order.orderValue}}
+                    </p>
+                    <p v-for="item in order.items" :key="item.id">
+                      <span>
+                        <b>Item id:</b>
+                        {{item}}
+                      </span>
+                    </p>
+                  </v-card-text>
+                </v-card>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
+        </v-card-text>
+      </v-card>
     </v-container>
   </main>
 </template>
