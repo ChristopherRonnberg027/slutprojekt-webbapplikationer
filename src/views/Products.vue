@@ -35,10 +35,11 @@ export default {
     text-align: center;
   }
   .product-list {
+    padding-top: 3rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-    gap: 3rem;
-    margin: 2rem 0;
+    gap: 2rem;
+    margin: 2rem 1rem;
   }
 }
 </style>
