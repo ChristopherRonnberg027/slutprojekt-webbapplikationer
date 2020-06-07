@@ -1,14 +1,18 @@
 <template>
   <main>
-    <h1>Shopping Cart</h1>
-    <cart-item v-for="cartItem in cart" :key="cartItem.product._id" :cartItem="cartItem" />
-    <h2>Total: {{total}}</h2>
-    <button @click="createOrder()" class="purchase">Checkout</button>
+    <h1 class="ma-5">Shopping cart</h1>
+    <v-container>
+      <v-card class="my-5" v-for="cartItem in cart" :key="cartItem.product._id">
+        <cart-item :cartItem="cartItem" />
+      </v-card>
+      <v-btn @click="createOrder()">Checkout</v-btn>
+    </v-container>
   </main>
 </template>
 
 <script>
 import CartItem from "@/components/CartItem";
+
 export default {
   name: "ShoppingCart",
   components: {
@@ -46,11 +50,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.purchase {
-  background: #83fbe5;
-  border: 2px solid #000000;
-  box-sizing: border-box;
-  font-size: 1.5rem;
-  padding: 0 1rem;
-}
+
 </style>
