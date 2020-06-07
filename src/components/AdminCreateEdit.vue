@@ -8,6 +8,7 @@
       </h3>
     </div>
     <div class="container">
+      <div class="error" v-if="error">No empty fields allowed!</div>
       <div class="product">
         <div class="input">
           <p>Title</p>
@@ -57,6 +58,7 @@ export default {
   },
   data() {
     return {
+      error: false,
       product: this.id
         ? this.$store.getters.productById(this.id)
         : {
@@ -73,13 +75,24 @@ export default {
     cancel() {
       this.$emit("cancel");
     },
-    saveProduct(){
-      if(this.id){
-        this.$store.dispatch('editProduct',this.product)
-      }else{
-        this.$store.dispatch('createProduct',this.product)
+    saveProduct() {
+      if (
+        !this.product.title ||
+        !this.product.price ||
+        !this.product.category ||
+        !this.product.shortDesc ||
+        !this.product.longDesc ||
+        !this.product.imgFile
+      ) {
+        this.error = true;
+      } else {
+        if (this.id) {
+          this.$store.dispatch("editProduct", this.product);
+        } else {
+          this.$store.dispatch("createProduct", this.product);
+        }
+        this.cancel();
       }
-      this.cancel()
     }
   }
 };
@@ -101,5 +114,8 @@ export default {
       flex: 8;
     }
   }
+}
+.error {
+  color: crimson;
 }
 </style>
