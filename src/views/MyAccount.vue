@@ -1,8 +1,9 @@
 <template>
   <main>
     <h1>{{user.name}}'s account</h1>
+    <p class="logout-btn" @click="logout()">log out</p>
     <section class="user-details">
-      <h2>User details</h2>
+      <h2>Personal information</h2>
       <p>
         <strong>Name:</strong>
         {{user.name}}
@@ -29,15 +30,15 @@
       </p>
     </section>
     <!-- <button @click="logout()">logout</button> -->
-    <p class="logout-btn" @click="logout()">log out</p>
+
     <section class="user-orders">
-      <h2>User orders</h2>
+      <h2>Order history</h2>
       <article v-for="order in orders" :key="order._id">
-        <p>Date: {{order.timeStamp}}</p>
-        <p>Status: {{order.status}}</p>
-        <p>Total sum: {{order.orderValue}}</p>
+        <p><strong>Date for purchase: </strong>{{order.timeStamp}}</p>
+        <p><strong>Delivery status: </strong>{{order.status}}</p>
+        <p><strong>Total sum: </strong>{{order.orderValue}}</p>
         <p v-for="item in order.items" :key="item.id">
-          <span>Item id: {{item}}</span>
+          <span><strong>Item id: </strong>{{item}}</span>
         </p>
       </article>
     </section>
@@ -68,12 +69,15 @@ export default {
 
 <style lang="scss" scoped>
 main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  min-height: 500px;
+  padding: 0 1rem;
+  margin: 3rem;
 
   h1 {
-    margin: 2rem 0;
+    margin-bottom: 1rem;
   }
 
   section {
@@ -85,20 +89,28 @@ main {
     background-color: rgba(0, 0, 0, 0.15);
 
     article {
-      border: 1px solid blue;
+      border: 1px solid black;
+      padding: 0.5rem;
       margin: 1.5rem 0;
     }
   }
   .logout-btn {
-    margin-top: 3rem;
+    max-width: 10rem;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    font-weight: 700;
     background: #58e0b7;
     border: 2px solid #000000;
-    padding: 0rem 0.5rem;
+    padding: 0rem 1rem;
     &:hover {
       cursor: pointer;
       background: cornflowerblue;
+    }
+    &:active {
+      transform: scale(0.98);
+    }
+    &:focus {
+      outline: none;
     }
   }
 }

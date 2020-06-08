@@ -5,7 +5,13 @@
       <cart-item v-for="cartItem in cart" :key="cartItem.product._id" :cartItem="cartItem" />
       <h2>Total: {{total}}</h2>
       <!-- <button @click="createOrder" class="purchase">Checkout</button> -->
-      <p class="create-btn" @click="createOrder">Checkout</p>
+      <p v-if="total" class="create-btn" @click="createOrder">Checkout</p>
+      <div v-if="!total" class="empty">
+        <p>
+          <strong>Oh no! Your cart is empty! Why not buy some stuff?</strong>
+        </p>
+        <p class="back-btn" @click="toProducts">Back to products!</p>
+      </div>
     </div>
   </main>
 </template>
@@ -43,6 +49,9 @@ export default {
       } else {
         this.$router.push("/login");
       }
+    },
+    toProducts() {
+      this.$router.push("/products");
     }
   }
 };
@@ -70,17 +79,30 @@ main {
     background-color: rgba(0, 0, 0, 0.15);
     padding: 1rem;
     margin: 0 auto;
+
+    .empty {
+      text-align: center;
+      margin-top: 1rem;
+    }
   }
-  .create-btn{
+  .create-btn,
+  .back-btn {
     margin-top: 3rem;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    font-weight: 700;
     background: #58e0b7;
     border: 2px solid #000000;
-    padding: 0rem 0.5rem;
+    padding: 0rem 1rem;
     &:hover {
       cursor: pointer;
       background: cornflowerblue;
+    }
+    &:active {
+      transform: scale(0.98);
+    }
+    &:focus {
+      outline: none;
     }
   }
 }

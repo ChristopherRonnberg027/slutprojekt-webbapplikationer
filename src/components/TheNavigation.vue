@@ -10,7 +10,7 @@ export default {
     return {
       links: [
         {text: 'Home', route:'/'},
-        {text: 'Products', route:'/products'},
+        {text: 'Products', route:'/products'}
       ]
     }
   }

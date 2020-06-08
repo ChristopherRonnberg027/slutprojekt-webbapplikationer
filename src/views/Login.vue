@@ -61,25 +61,40 @@ main {
 
     .register {
       margin-top: 3rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    background: #eee;
+    border: 2px solid #000000;
+    padding: 0rem 1rem;
+    &:hover {
+      cursor: pointer;
+      background: cornflowerblue;
+    }
+    &:active {
+      transform: scale(0.98);
+    }
+    &:focus {
+      outline: none;
+    }
+    }
+    .login {
+      margin-top: 3rem;
       text-align: center;
-      font-size: 0.8rem;
-      background: #eee;
+      font-size: 1rem;
+      font-weight: 700;
+      background: #58e0b7;
       border: 2px solid #000000;
-      padding: 0rem 0.5rem;
+      padding: 0rem 1rem;
       &:hover {
         cursor: pointer;
         background: cornflowerblue;
       }
-    }
-    .login {
-      text-align: center;
-      font-size: 0.8rem;
-      background: #58e0b7;
-      border: 2px solid #000000;
-      padding: 0rem 0.5rem;
-      &:hover {
-        cursor: pointer;
-        background: cornflowerblue;
+      &:active {
+        transform: scale(0.98);
+      }
+      &:focus {
+        outline: none;
       }
     }
   }
