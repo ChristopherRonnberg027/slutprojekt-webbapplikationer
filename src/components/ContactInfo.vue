@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <section class="contact-info">
+    <section class="contact-info" id="contact">
       <h3>Contact</h3>
       <p>High Street 1</p>
       <p>PO Box 1337</p>

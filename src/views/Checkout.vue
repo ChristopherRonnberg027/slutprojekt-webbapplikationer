@@ -3,6 +3,7 @@
     <h1>Your order is on the way!</h1>
     <div class="shipping-container">
       <h3>Your order and billing is shipped to:</h3>
+      <h4>total sum is: {{totalSum}}</h4>
       <p class="shipping-info">{{user.adress.street}}</p>
       <p class="shipping-info">{{user.adress.zip}}</p>
       <p class="shipping-info">{{user.adress.city}}</p>
@@ -17,7 +18,7 @@ export default {
     return {};
   },
   props: {
-    items: Object
+    totalSum : Number
   },
   computed: {
     // beforeCreate() {},

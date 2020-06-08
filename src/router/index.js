@@ -12,7 +12,7 @@ import AdminArea from '../views/AdminArea'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Home',
@@ -21,7 +21,8 @@ Vue.use(VueRouter)
   {
     path: '/checkout',
     name: 'Checkout',
-    component: Checkout
+    component: Checkout,
+    props: true
   },
   {
     path: '/login',

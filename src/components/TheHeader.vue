@@ -42,8 +42,8 @@ export default {
       return this.$store.state.user;
     },
     getItemQuantity() {
-      console.log(this.$store.getters.cartTotalPrice);
-      return this.$store.getters.cartTotalPrice;
+      
+      return this.$store.getters.amountOfItems;
     }
   },
   methods: {

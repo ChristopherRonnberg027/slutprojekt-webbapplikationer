@@ -5,7 +5,7 @@
       <the-navigation />
     </div>
     <router-view />
-    <contact-info />
+    <contact-info id="bot" />
   </div>
 </template>
 

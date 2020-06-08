@@ -45,7 +45,8 @@ export default {
           }
         }
         this.$store.dispatch("createOrder", { items: this.items });
-        this.$router.push("/checkout");
+        //this.$router.push("/checkout");
+        this.$router.push({name: 'Checkout', params: {totalSum: this.total}});
       } else {
         this.$router.push("/login");
       }
