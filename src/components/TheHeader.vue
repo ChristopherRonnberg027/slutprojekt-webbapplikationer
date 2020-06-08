@@ -55,8 +55,8 @@ export default {
       this.$router.push("/shoppingcart");
     },
     accessAdminArea(){
-      //this.$router.push("/admin");
-      console.log('Not active')
+      this.$router.push("/admin");
+      
     }
   }
 };
