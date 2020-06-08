@@ -82,7 +82,7 @@ main {
 
   section {
     //border: 1px solid red;
-    min-width: 400px;
+    // max-width: 900px;
     margin: 2rem 0;
 
     padding: 1rem;

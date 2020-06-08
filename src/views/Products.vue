@@ -30,7 +30,6 @@ export default {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 70vw;
   h1 {
     text-align: center;
   }

@@ -47,9 +47,6 @@ export default {
     }
   },
   methods: {
-    // getItemQuantity() {
-    //   return this.$store.state.cart.length;
-    // },
     accessProfile() {
       if (this.$store.state.user) {
         this.$router.push({ name: "MyAccount" });
@@ -119,7 +116,6 @@ header {
         background: #58e0b7;
       }
       .profile {
-        // remove padding, not og
         padding: 0.5rem;
 
         background-color: none;
@@ -184,5 +180,14 @@ header {
   .elselog {
     cursor: pointer;
   }
+}
+@media screen and (max-width: 400px){
+  .logo {
+    // background-color: red;
+      img {
+        width: 5rem;
+        //transform: rotate(-90deg);
+      }
+    }
 }
 </style>
