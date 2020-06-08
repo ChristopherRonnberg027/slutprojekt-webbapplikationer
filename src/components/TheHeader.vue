@@ -7,6 +7,10 @@
       </section>
 
       <section class="access">
+        <div class="admin" @click="accessAdminArea()" v-if="user && user.role === 'admin'">
+          <img src="../assets/icon-edit-white.svg" alt />
+        </div>
+
         <div class="profile" @click="accessProfile()">
           <!-- <img src="../assets/test/svg_test-black-profile.svg" alt /> -->
           <img src="../assets/test/svg_test-white-profile.svg" alt />
@@ -56,6 +60,10 @@ export default {
     },
     toHome() {
       this.$router.push("/");
+    },
+    accessAdminArea(){
+      this.$router.push("/admin");
+      
     }
   }
 };
@@ -124,7 +132,7 @@ header {
       grid-template-columns: 1.8rem 1rem;
       cursor: pointer;
       img {
-        width: 2rem;
+        width: 1.5rem;
         height: 100%;
       }
       .display {

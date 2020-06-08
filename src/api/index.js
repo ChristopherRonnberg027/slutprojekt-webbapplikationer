@@ -66,8 +66,8 @@ async function editProduct(product, token) {
         body: JSON.stringify(product)
     })
 }
-async function deleteProduct(product, token) {
-    await fetch(URL + '/products/' + product._id, {
+async function deleteProduct(id, token) {
+    await fetch(URL + '/products/' + id, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

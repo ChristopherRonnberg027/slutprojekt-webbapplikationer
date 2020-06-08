@@ -8,6 +8,7 @@ import Products from '../views/Products.vue'
 import ShoppingCart from '../views/ShoppingCart.vue'
 import SingleProduct from '../views/SingleProduct'
 import Register from '../views/Register'
+import AdminArea from '../views/AdminArea'
 
 Vue.use(VueRouter)
 
@@ -52,6 +53,11 @@ Vue.use(VueRouter)
     path: '/shoppingcart',
     name: 'ShoppingCart',
     component: ShoppingCart
+  },
+  {
+    path: '/admin',
+    name: 'AdminArea',
+    component: AdminArea
   },
 ]
 
