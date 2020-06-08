@@ -58,18 +58,28 @@ export default {
   },
   data() {
     return {
-      error: false,
-      product: this.id
-        ? this.$store.getters.productById(this.id)
-        : {
-            title: "",
-            price: null,
-            category: "",
-            shortDesc: "",
-            longDesc: "",
-            imgFile: ""
-          }
+      productToCreateOrEdit: this.$store.getters.productById(this.id) || {
+        title: "",
+        price: null,
+        shortDesc: "",
+        category: "",
+        longDesc: "",
+        imgFile: ""
+      },
+      error: false
     };
+  },
+  computed: {
+    product() {
+      return {
+        title: this.productToCreateOrEdit.title,
+        price: this.productToCreateOrEdit.price,
+        category: this.productToCreateOrEdit.category,
+        shortDesc: this.productToCreateOrEdit.shortDesc,
+        longDesc: this.productToCreateOrEdit.longDesc,
+        imgFile: this.productToCreateOrEdit.imgFile
+      };
+    }
   },
   methods: {
     cancel() {
@@ -111,7 +121,7 @@ export default {
     input[type="text"],
     input[type="number"],
     select {
-      background: #E2E2E2;
+      background: #e2e2e2;
       border: none;
       padding: 1rem;
       margin-left: 1rem;
@@ -131,8 +141,8 @@ export default {
 @media screen and (max-width: 448px) {
   .wrapper .container .product {
     .input {
-      p{
-        padding-bottom:0.2rem;
+      p {
+        padding-bottom: 0.2rem;
       }
       @include flex-column;
       align-items: flex-start;

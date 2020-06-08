@@ -1,11 +1,8 @@
 <template>
-  <article class="product">
-    <router-link
-      :to="'/products/'+product._id"
-      :class="['image-container',{'single-product':singleProduct}]"
-    >
-      <img :src="require('@/assets/'+product.imgFile)" alt />
-    </router-link>
+    <article class="product">
+        <div @click.once="toSingleProduct()" :class="['image-container',{'single-product':singleProduct}]">
+            <img :src="require('@/assets/'+product.imgFile)" alt />
+        </div>
 
     <div class="product-info">
       <div class="title-price">
@@ -22,16 +19,20 @@
 
 <script>
 export default {
-  name: "Product",
-  props: {
-    product: Object,
-    singleProduct: Boolean
-  },
-  methods: {
-    addToCart() {
-      this.$store.dispatch("addToCart", this.product);
+    name: "Product",
+    props: {
+        product: Object,
+        singleProduct:Boolean
+    },
+    methods: {
+        addToCart() {
+            this.$store.dispatch("addToCart", this.product);
+        },
+        async toSingleProduct(){
+            await this.$store.dispatch("getProduct", this.product._id);
+            this.$router.push('/products/'+this.product._id)
+        }
     }
-  }
 };
 </script>
 
@@ -61,12 +62,17 @@ export default {
     @include flex-row-end;
     min-height: 21rem;
 
+    &:hover{
+        cursor: pointer;
+    }
+
     img {
       object-fit: cover;
       width: 18rem;
     }
   }
   .single-product {
+    pointer-events: none;
     min-height: 30vw;
     img {
       width: 100%;
