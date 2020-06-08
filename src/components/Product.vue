@@ -1,8 +1,8 @@
 <template>
     <article class="product">
-        <router-link :to="'/products/'+product._id" :class="['image-container',{'single-product':singleProduct}]">
+        <div @click.once="toSingleProduct()" :class="['image-container',{'single-product':singleProduct}]">
             <img :src="require('@/assets/'+product.imgFile)" alt />
-        </router-link>
+        </div>
 
         <div class="product-info">
             <div class="title-price">
@@ -27,6 +27,10 @@ export default {
     methods: {
         addToCart() {
             this.$store.dispatch("addToCart", this.product);
+        },
+        async toSingleProduct(){
+            await this.$store.dispatch("getProduct", this.product._id);
+            this.$router.push('/products/'+this.product._id)
         }
     }
 };
@@ -57,6 +61,9 @@ export default {
         padding: 1rem 2rem 0;
         @include flex-row-end;
         min-height: 21rem;
+        &:hover{
+            cursor: pointer;
+        }
 
         img {
             object-fit: cover;
@@ -64,8 +71,11 @@ export default {
         }
     }    
     .single-product{
+        pointer-events: none;
         min-height: 30vw;
+        // max-height: 30rem;
         img {
+            max-width: 27rem;
             width: 100%;
         }
     }
