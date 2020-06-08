@@ -2,8 +2,7 @@
   <header>
     <div class="wrapper">
       <section class="logo" @click="toHome()">
-        <img src="../assets/test/svg_test-white-sinus.svg" alt />
-        <!-- <img src="../assets/sinus-logo.svg" alt /> -->
+        <img src="../assets/test/svg_test-black-sinus.svg" alt />
       </section>
 
       <section class="access">
@@ -12,17 +11,14 @@
         </div>
 
         <div class="profile" @click="accessProfile()">
-          <!-- <img src="../assets/test/svg_test-black-profile.svg" alt /> -->
-          <img src="../assets/test/svg_test-white-profile.svg" alt />
-          <!-- <img src="../assets/icon-user-black.svg" alt /> -->
+          <img src="../assets/test/svg_test-black-profile.svg" alt />
         </div>
 
         <div class="cart" @click="accessCart()">
-          <!-- <img src="../assets/icon-bag-black.svg" alt /> -->
-          <img src="../assets/test/svg_test-white-cart.svg" alt />
+          <img src="../assets/test/svg_test-black-cart.svg" alt />
 
           <div class="display">
-            <p v-text="getItemQuantity()"></p>
+            <p v-text="getItemQuantity"></p>
           </div>
         </div>
       </section>
@@ -33,7 +29,9 @@
       <strong>{{user.name}}</strong> | Role:
       <strong>{{user.role}}</strong>
     </p>
-    <p v-else class="display-role elselog" @click="accessProfile()">Log in for buying shit</p>
+    <p v-else class="display-role elselog" @click="accessProfile()">
+      <strong>Log in for buying shit</strong>
+    </p>
   </header>
 </template>
 
@@ -42,12 +40,13 @@ export default {
   computed: {
     user() {
       return this.$store.state.user;
+    },
+    getItemQuantity() {
+      
+      return this.$store.getters.amountOfItems;
     }
   },
   methods: {
-    getItemQuantity() {
-      return this.$store.state.cart.length;
-    },
     accessProfile() {
       if (this.$store.state.user) {
         this.$router.push({ name: "MyAccount" });
@@ -61,9 +60,8 @@ export default {
     toHome() {
       this.$router.push("/");
     },
-    accessAdminArea(){
+    accessAdminArea() {
       this.$router.push("/admin");
-      
     }
   }
 };
@@ -82,8 +80,6 @@ export default {
 }
 header {
   .wrapper {
-    // background-color: #c4c4c4;
-    background-color: rgba(0, 0, 0, 0.85);
     @include flex-center-space;
 
     padding: 2rem 1rem 0rem 1rem;
@@ -99,10 +95,27 @@ header {
     .access {
       display: grid;
       grid-template-columns: auto auto auto;
-      grid-gap: 1rem;
+      grid-gap: 0.5rem;
 
+      .admin {
+        padding: 0.5rem;
+
+        background-color: black;
+        clip-path: circle();
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        img {
+          width: 1.5rem;
+          height: 100%;
+        }
+      }
+      .admin:hover {
+        background: #58e0b7;
+      }
       .profile {
-        // remove padding, not og
         padding: 0.5rem;
 
         background-color: none;
@@ -113,7 +126,7 @@ header {
         transition: background-color 0.2s;
 
         img {
-          width: 2rem;
+          width: 1.5rem;
           height: 100%;
         }
       }
@@ -125,65 +138,56 @@ header {
       .display-role {
         color: black;
       }
-    }
-
-    .cart {
-      display: grid;
-      grid-template-columns: 1.8rem 1rem;
-      cursor: pointer;
-      img {
-        width: 1.5rem;
-        height: 100%;
-      }
-      .display {
-        padding: .6rem;
-        background-color: #58e0b7;
-        clip-path: circle();
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s;
-        p {
-          font-weight: 800;
-          color: black;
+      .cart {
+        display: grid;
+        grid-template-columns: 1.2rem 1rem;
+        cursor: pointer;
+        img {
+          width: 1.5rem;
+          height: 100%;
+        }
+        .display {
+          margin-bottom: 1.2rem;
+          padding: 0.7rem;
+          background-color: #58e0b7;
+          clip-path: circle();
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background-color 0.2s;
+          p {
+            font-weight: 800;
+            color: black;
+          }
         }
       }
-    }
-    // .cart {
-    //   display: grid;
-    //   grid-template-rows: 1rem 1rem;
-    //   cursor: pointer;
-
-    //   .display {
-    //     padding: 0.7rem;
-    //     background-color: #58e0b7;
-    //     clip-path: circle();
-    //     display: flex;
-    //     align-items: center;
-    //     transition: background-color 0.2s;
-    //     p {
-    //       font-weight: 800;
-    //       color: black;
-    //     }
-    //   }
-    // }
-    .cart:hover {
-      .display {
-        background: #58e0b7;
+      .cart:hover {
+        .display {
+          background: black;
+          p {
+            color: white;
+          }
+        }
       }
     }
   }
   .display-role {
-    padding-right: 1.4rem;
     text-align: right;
-    color: white;
-    // background-color: #c4c4c4;
-    background-color: rgba(0, 0, 0, 0.85);
-    //border-bottom: 1px solid black;
-    //margin: 0rem 1rem 0rem 1rem;
+    color: black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.55);
+    margin: 0rem 1rem 0rem 1rem;
   }
   .elselog {
     cursor: pointer;
   }
+}
+@media screen and (max-width: 400px){
+  .logo {
+    // background-color: red;
+      img {
+        width: 5rem;
+        //transform: rotate(-90deg);
+      }
+    }
 }
 </style>

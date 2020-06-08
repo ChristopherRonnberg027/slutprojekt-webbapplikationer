@@ -1,99 +1,105 @@
 <template>
-    <article class="product">
-        <router-link :to="'/products/'+product._id" :class="['image-container',{'single-product':singleProduct}]">
-            <img :src="require('@/assets/'+product.imgFile)" alt />
-        </router-link>
+  <article class="product">
+    <router-link
+      :to="'/products/'+product._id"
+      :class="['image-container',{'single-product':singleProduct}]"
+    >
+      <img :src="require('@/assets/'+product.imgFile)" alt />
+    </router-link>
 
-        <div class="product-info">
-            <div class="title-price">
-                <p class="title">{{product.title}}</p>
-                <p class="price">{{product.price}} kr</p>
-            </div>
-            <div class="desc-buy">
-                <p class="short-desc">{{product.shortDesc}}</p>
-                <p class="buy" @click="addToCart">Add to Cart</p>
-            </div>
-        </div>
-    </article>
+    <div class="product-info">
+      <div class="title-price">
+        <p class="title">{{product.title}}</p>
+        <p class="price">{{product.price}} kr</p>
+      </div>
+      <div class="desc-buy">
+        <p class="short-desc">{{product.shortDesc}}</p>
+        <p class="buy" @click="addToCart">Add to Cart</p>
+      </div>
+    </div>
+  </article>
 </template>
 
 <script>
 export default {
-    name: "Product",
-    props: {
-        product: Object,
-        singleProduct:Boolean
-    },
-    methods: {
-        addToCart() {
-            this.$store.dispatch("addToCart", this.product);
-        }
+  name: "Product",
+  props: {
+    product: Object,
+    singleProduct: Boolean
+  },
+  methods: {
+    addToCart() {
+      this.$store.dispatch("addToCart", this.product);
     }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 @mixin flex-column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 @mixin flex-row {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 @mixin flex-row-end {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .product {
-    font-size: 1rem;
+  font-size: 1rem;
+  @include flex-column;
+
+  .image-container {
+    //border-radius: 5px;
+    background-color: #e6e6e6;
+    padding: 1rem 2rem 0;
+    @include flex-row-end;
+    min-height: 21rem;
+
+    img {
+      object-fit: cover;
+      width: 18rem;
+    }
+  }
+  .single-product {
+    min-height: 30vw;
+    img {
+      width: 100%;
+      max-width: 27rem;
+    }
+  }
+  .product-info {
+    padding-top: 0.5rem;
     @include flex-column;
-
-    .image-container {
-        //border-radius: 5px;
-        background-color: #e6e6e6;
-        padding: 1rem 2rem 0;
-        @include flex-row-end;
-        min-height: 21rem;
-
-        img {
-            object-fit: cover;
-            width: 18rem;
+    .title-price,
+    .desc-buy {
+      @include flex-row;
+      .buy {
+        font-size: 0.8rem;
+        background: none;
+        border: 2px solid #000000;
+        padding: 0rem 0.5rem;
+        &:hover {
+          cursor: pointer;
+          background: #58e0b7;
         }
-    }    
-    .single-product{
-        min-height: 30vw;
-        img {
-            width: 100%;
+        &:active {
+          transform: scale(0.98);
         }
+        &:focus {
+          outline: none;
+        }
+      }
     }
-    .product-info {
-        padding-top: 0.5rem;
-        @include flex-column;
-        .title-price,
-        .desc-buy {
-            @include flex-row;
-            .buy {
-                font-size: .8rem;
-                background: none;
-                // background: #58e0b7;
-                border: 2px solid #000000;
-                //padding: 0 1rem;
-                //border-radius: 10px;
-                padding:0rem 0.5rem;
-                &:hover {
-                    cursor: pointer;
-                    //background: cornflowerblue;
-                    background: #58e0b7;
-                }
-            }
-        }
-        .title,
-        .buy {
-            font-weight: bold;
-        }
+    .title,
+    .buy {
+      font-weight: bold;
     }
+  }
 }
 </style>
