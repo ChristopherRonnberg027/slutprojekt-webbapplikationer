@@ -5,7 +5,7 @@
       <cart-item v-for="cartItem in cart" :key="cartItem.product._id" :cartItem="cartItem" />
       <h2>Total: {{total}}</h2>
       <!-- <button @click="createOrder" class="purchase">Checkout</button> -->
-      <p v-if="total" class="create-btn" @click="createOrder">Checkout</p>
+      <p v-if="total" class="create-btn" @click.once="createOrder">Checkout</p>
       <div v-if="!total" class="empty">
         <p>
           <strong>Oh no! Your cart is empty! Why not buy some stuff?</strong>
