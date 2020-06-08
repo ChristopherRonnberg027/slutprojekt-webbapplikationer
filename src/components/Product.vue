@@ -70,6 +70,7 @@ export default {
     min-height: 30vw;
     img {
       width: 100%;
+      max-width: 27rem;
     }
   }
   .product-info {

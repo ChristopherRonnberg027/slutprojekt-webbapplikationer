@@ -35,7 +35,8 @@ export default {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    max-width: 800px;
+    max-width: 600px;
+    
     padding-bottom: 5rem;
 }
 </style>

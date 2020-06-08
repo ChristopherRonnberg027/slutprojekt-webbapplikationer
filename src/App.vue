@@ -38,7 +38,7 @@ body {
 
 #app {
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 1224px;
   //height: 100vh;
   display: flex;
   flex-direction: column;
