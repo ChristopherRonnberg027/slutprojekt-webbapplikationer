@@ -18,7 +18,7 @@ export default {
     return {};
   },
   props: {
-    totalSum : Number
+    totalSum: Number
   },
   computed: {
     // beforeCreate() {},
@@ -35,6 +35,11 @@ export default {
     // }
     toProducts() {
       this.$router.push("/products");
+    }
+  },
+  created(){
+    if (!this.totalSum){
+      this.$router.push("/shoppingcart");
     }
   }
 };

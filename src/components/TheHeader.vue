@@ -42,26 +42,33 @@ export default {
       return this.$store.state.user;
     },
     getItemQuantity() {
-      
       return this.$store.getters.amountOfItems;
     }
   },
   methods: {
     accessProfile() {
       if (this.$store.state.user) {
-        this.$router.push({ name: "MyAccount" });
+        if (this.$route.name !== "MyAccount") {
+          this.$router.push({ name: "MyAccount" });
+        }
       } else {
-        this.$router.push({ name: "Login" });
+        if (this.$route.name !== "Login") {
+          this.$router.push({ name: "Login" });
+        }
       }
     },
     accessCart() {
-      this.$router.push("/shoppingcart");
+      if (this.$route.name !== "ShoppingCart") {
+        this.$router.push("/shoppingcart");
+      }
     },
     toHome() {
       this.$router.push("/");
     },
     accessAdminArea() {
-      this.$router.push("/admin");
+      if (this.$route.name !== "AdminArea") {
+        this.$router.push("/admin");
+      }
     }
   }
 };
@@ -181,13 +188,13 @@ header {
     cursor: pointer;
   }
 }
-@media screen and (max-width: 400px){
+@media screen and (max-width: 400px) {
   .logo {
     // background-color: red;
-      img {
-        width: 5rem;
-        //transform: rotate(-90deg);
-      }
+    img {
+      width: 5rem;
+      //transform: rotate(-90deg);
     }
+  }
 }
 </style>

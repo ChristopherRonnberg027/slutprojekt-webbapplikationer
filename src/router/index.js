@@ -23,12 +23,26 @@ const routes = [
     path: '/checkout',
     name: 'Checkout',
     component: Checkout,
-    props: true
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (Store.state.user) {
+        next()
+      } else {
+        next({ name: 'ShoppingCart' })
+      }
+    }
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter: (to, from, next) => {
+      if (Store.state.user) {
+        next(false)
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/register',
@@ -38,7 +52,14 @@ const routes = [
   {
     path: '/myaccount',
     name: 'MyAccount',
-    component: MyAccount
+    component: MyAccount,
+    beforeEnter: (to, from, next) => {
+      if (!Store.state.user) {
+        next({ name: 'Login' })
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/products',
@@ -60,7 +81,7 @@ const routes = [
     path: '/admin',
     name: 'AdminArea',
     component: AdminArea,
-    meta: {reqAdmin: true}
+    meta: { reqAdmin: true }
   },
 ]
 
@@ -72,10 +93,12 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.reqAdmin) {
-    if (Store.state.user && Store.state.user.role === 'admin') {
+    if (!Store.state.user) {
+      router.push({ name: 'Login' })
+    } else if (Store.state.user.role === 'admin') {
       next();
-    } else {
-      next({name: 'Login'})
+    } else if (Store.state.user.role === 'customer') {
+      router.push({ name: 'MyAccount' })
     }
   } else {
     next();
