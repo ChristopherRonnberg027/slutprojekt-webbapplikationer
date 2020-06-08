@@ -1,6 +1,7 @@
 <template>
   <nav>
     <router-link v-for="link in links" :key="link.name" :to="link.route"><span>{{link.text}}</span></router-link>
+    <a href="#bot">Contact</a>
   </nav>
 </template>
 
@@ -10,7 +11,7 @@ export default {
     return {
       links: [
         {text: 'Home', route:'/'},
-        {text: 'Products', route:'/products'},
+        {text: 'Products', route:'/products'}
       ]
     }
   }

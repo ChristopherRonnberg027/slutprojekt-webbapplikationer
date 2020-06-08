@@ -130,7 +130,13 @@ export default {
   }
 }
 .error {
+  //max-width: 200px;
+  text-align: center;
+  margin: .5rem;
+  padding: .4rem;
+  border: 1px solid crimson;
   color: crimson;
+  font-weight: 700;
 }
 @media screen and (max-width: 448px) {
   .wrapper .container .product {

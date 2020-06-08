@@ -32,12 +32,13 @@ export default {
 
 <style lang="scss" scoped>
 .single-product {
-  padding: 0 1rem;
-  margin-top: 5rem;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 800px;
-  padding-bottom: 5rem;
+    padding: 0 1rem;
+    margin-top: 5rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 600px;
+    
+    padding-bottom: 5rem;
 }
 </style>

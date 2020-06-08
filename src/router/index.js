@@ -9,10 +9,11 @@ import ShoppingCart from '../views/ShoppingCart.vue'
 import SingleProduct from '../views/SingleProduct'
 import Register from '../views/Register'
 import AdminArea from '../views/AdminArea'
+import Store from "../store/index";
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Home',
@@ -21,7 +22,8 @@ Vue.use(VueRouter)
   {
     path: '/checkout',
     name: 'Checkout',
-    component: Checkout
+    component: Checkout,
+    props: true
   },
   {
     path: '/login',
@@ -57,7 +59,8 @@ Vue.use(VueRouter)
   {
     path: '/admin',
     name: 'AdminArea',
-    component: AdminArea
+    component: AdminArea,
+    meta: {reqAdmin: true}
   },
 ]
 
@@ -65,6 +68,18 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.reqAdmin) {
+    if (Store.state.user && Store.state.user.role === 'admin') {
+      next();
+    } else {
+      next({name: 'Login'})
+    }
+  } else {
+    next();
+  }
 })
 
 export default router
