@@ -18,7 +18,8 @@
       <input clas="city" type="text" v-model="newUser.adress.city" />
       <p>zip</p>
       <input clas="zip" type="text" v-model="newUser.adress.zip" />
-      <button @click="registerUser()" class="registerbtn">register new</button>
+      <!-- <button @click="registerUser()" class="registerbtn">register new</button> -->
+      <p class="register" @click="registerUser()">register</p>
     </section>
   </main>
 </template>
@@ -42,7 +43,7 @@ export default {
   },
   methods: {
     registerUser() {
-      this.$store.dispatch('register', this.newUser);
+      this.$store.dispatch("register", this.newUser);
     }
   }
 };
@@ -50,21 +51,46 @@ export default {
 
 <style lang="scss" scoped>
 main {
+  //margin: 0 auto;
+  //max-width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  // display: grid;
+
   h1 {
     margin: 4rem 0;
   }
   section {
+    background-color: rgba(0,0,0,0.15);
+    display: grid;
     margin-bottom: 2rem;
+    padding: 2rem;
     input {
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
+      border-radius: 0;
+      border: 1px solid black;
+    }
+    .register {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.8rem;
+      background: #58e0b7;
+      border: 2px solid #000000;
+      padding: 0rem 0.5rem;
+      &:hover {
+        cursor: pointer;
+        background: cornflowerblue;
+      }
+    }
+    p {
+      font-weight: 500;
     }
   }
-  button {
-    width: 100%;
-    display: block;
-  }
+
+  // button {
+  //   width: 100%;
+  //   display: block;
+  // }
 }
 </style>

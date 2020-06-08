@@ -1,16 +1,35 @@
 <template>
   <main>
-    <h1>my account view</h1>
+    <h1>{{user.name}}'s account</h1>
     <section class="user-details">
       <h2>User details</h2>
-      <p>Name: {{user.name}}</p>
-      <p>Email: {{user.email}}</p>
-      <p>Role: {{user.role}}</p>
-      <p>City: {{user.adress.city}}</p>
-      <p>Street: {{user.adress.street}}</p>
-      <p>Zip: {{user.adress.zip}}</p>
+      <p>
+        <strong>Name:</strong>
+        {{user.name}}
+      </p>
+      <p>
+        <strong>Email:</strong>
+        {{user.email}}
+      </p>
+      <p>
+        <strong>Role:</strong>
+        {{user.role}}
+      </p>
+      <p>
+        <strong>City:</strong>
+        {{user.adress.city}}
+      </p>
+      <p>
+        <strong>Street:</strong>
+        {{user.adress.street}}
+      </p>
+      <p>
+        <strong>Zip:</strong>
+        {{user.adress.zip}}
+      </p>
     </section>
-    <button @click="logout()">logout</button>
+    <!-- <button @click="logout()">logout</button> -->
+    <p class="logout-btn" @click="logout()">log out</p>
     <section class="user-orders">
       <h2>User orders</h2>
       <article v-for="order in orders" :key="order._id">
@@ -29,8 +48,8 @@
 export default {
   methods: {
     logout() {
-      this.$store.dispatch('logout');
-      this.$router.push({name: 'Home'});
+      this.$store.dispatch("logout");
+      this.$router.push({ name: "Home" });
     }
   },
   computed: {
@@ -42,7 +61,7 @@ export default {
     }
   },
   beforeCreate() {
-    this.$store.dispatch('getOrders');
+    this.$store.dispatch("getOrders");
   }
 };
 </script>
@@ -58,13 +77,28 @@ main {
   }
 
   section {
-    border: 1px solid red;
+    //border: 1px solid red;
     min-width: 400px;
     margin: 2rem 0;
+
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.15);
 
     article {
       border: 1px solid blue;
       margin: 1.5rem 0;
+    }
+  }
+  .logout-btn {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.8rem;
+    background: #58e0b7;
+    border: 2px solid #000000;
+    padding: 0rem 0.5rem;
+    &:hover {
+      cursor: pointer;
+      background: cornflowerblue;
     }
   }
 }

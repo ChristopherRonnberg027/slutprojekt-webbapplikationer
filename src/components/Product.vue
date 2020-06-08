@@ -48,12 +48,12 @@ export default {
 }
 
 .product {
-    font-size: 1.4rem;
+    font-size: 1rem;
     @include flex-column;
 
     .image-container {
-        border-radius: 5px;
-        background-color: #c4c4c4;
+        //border-radius: 5px;
+        background-color: #e6e6e6;
         padding: 1rem 2rem 0;
         @include flex-row-end;
         min-height: 21rem;
@@ -70,18 +70,23 @@ export default {
         }
     }
     .product-info {
+        padding-top: 0.5rem;
         @include flex-column;
         .title-price,
         .desc-buy {
             @include flex-row;
             .buy {
-                background: #58e0b7;
-                border: 1px solid #000000;
-                padding: 0 1rem;
-                border-radius: 5px;
+                font-size: .8rem;
+                background: none;
+                // background: #58e0b7;
+                border: 2px solid #000000;
+                //padding: 0 1rem;
+                //border-radius: 10px;
+                padding:0rem 0.5rem;
                 &:hover {
                     cursor: pointer;
-                    background: cornflowerblue;
+                    //background: cornflowerblue;
+                    background: #58e0b7;
                 }
             }
         }

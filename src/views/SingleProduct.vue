@@ -1,6 +1,7 @@
 <template>
     <main class="single-product">
-        <h1>singleproduct view</h1>
+        <p>{{product.category}}</p>
+        <h1>{{product.title}}</h1>
         <product :product="product" singleProduct />
         <h2>{{product.category}}</h2>
         <p>{{product.longDesc}}</p>
@@ -34,6 +35,7 @@ export default {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    max-width: 500px;
+    max-width: 800px;
+    padding-bottom: 5rem;
 }
 </style>
