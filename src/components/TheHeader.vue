@@ -98,7 +98,7 @@ header {
 
     .access {
       display: grid;
-      grid-template-columns: auto auto;
+      grid-template-columns: auto auto auto;
       grid-gap: 1rem;
 
       .profile {
