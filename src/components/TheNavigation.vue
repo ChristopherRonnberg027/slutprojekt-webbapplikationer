@@ -29,6 +29,7 @@ nav {
     text-decoration: none;
     border-bottom: 3px solid rgba(0,0,0,0);
     font-weight: 900;
+    color: black;
   }
 
   a:visited {
