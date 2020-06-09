@@ -9,7 +9,7 @@ export default {
         shortDesc : "",
         category: "",
         longDesc : "",
-        imgFile : "skate-hero-1.jpg",
+        imgFile : "img-placeholder-sinus.png",
         serial:""
     },
     token: null
