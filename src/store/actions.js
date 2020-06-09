@@ -1,17 +1,21 @@
 import API from '@/api'
 
 export const login = async function (context, userCredentials) {
+    context.state.loader=true
     let user = await API.login(userCredentials);
     if (user) {
         context.commit('setUser', user);
     }
+    context.state.loader=false
 }
 
 export const register = async function (context, newUser) {
+    context.state.loader=true
     let user = await API.register(newUser);
     if (user) {
         context.commit('setUser', user);
     }
+    context.state.loader=false
 }
 
 export const getProducts = async function (context) {
@@ -56,8 +60,10 @@ export const createOrder = async function (context, newOrder) {
 }
 
 export const getOrders = async function (context) {
+    context.state.loader=true
     let orderHistory = await API.getOrders(context.state.token);
     context.commit('setUserOrderHistory', orderHistory);
+    context.state.loader=false
 }
 
 export const setCartAndUser = function (context) {
