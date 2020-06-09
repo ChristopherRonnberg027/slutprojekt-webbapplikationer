@@ -87,7 +87,11 @@ export default {
     async registerUser() {
       if (this.formIsValid) {
         await this.$store.dispatch("register", this.newUser);
-        this.$router.push({ name: "MyAccount" });
+        if (this.$store.state.user) {
+          this.$router.push({ name: "MyAccount" });
+        } else {
+          console.log('Email already in use');
+        }
       } else {
         console.log("form is not valid");
       }
