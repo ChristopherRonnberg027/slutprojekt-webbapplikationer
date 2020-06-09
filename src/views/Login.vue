@@ -64,6 +64,7 @@ export default {
 
 <style lang="scss" scoped>
 main {
+  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,13 +74,17 @@ main {
   }
 
   section {
+    
+    width: 90%;
+    max-width: 600px;
     padding-bottom: 3rem;
 
     div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       margin-top: 2rem;
+      input{
+        width: 100%;
+        padding: 0.5rem;
+      }
     }
 
     button {
@@ -88,13 +93,16 @@ main {
     }
 
     .register {
+      box-sizing: border-box;
+        padding: 0.5rem;
+      width: 100%;
       margin-top: 3rem;
       text-align: center;
       font-size: 1rem;
       font-weight: 700;
       background: #eee;
       border: 2px solid #000000;
-      padding: 0rem 1rem;
+     // padding: 0rem 1rem;
       &:hover {
         cursor: pointer;
         background: cornflowerblue;
@@ -107,13 +115,15 @@ main {
       }
     }
     .login {
+        padding: 0.5rem;
+      width: 100%;
       margin-top: 3rem;
       text-align: center;
       font-size: 1rem;
       font-weight: 700;
       background: #58e0b7;
       border: 2px solid #000000;
-      padding: 0rem 1rem;
+      //padding: 0rem 1rem;
       &:hover {
         cursor: pointer;
         background: cornflowerblue;
