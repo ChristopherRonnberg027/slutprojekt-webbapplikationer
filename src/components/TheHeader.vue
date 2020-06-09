@@ -49,11 +49,7 @@ export default {
     accessProfile() {
       if (this.$store.state.user) {
         if (this.$route.name !== "MyAccount") {
-          this.$router.push({ name: "MyAccount" }).catch(error => {
-            if (error.name != "NavigationDuplicated") {
-              throw error;
-            }
-          });
+          this.$router.push({ name: "MyAccount" })
         }
       } else {
         if (this.$route.name !== "Login") {
