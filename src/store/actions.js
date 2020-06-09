@@ -59,3 +59,7 @@ export const getOrders = async function (context) {
     let orderHistory = await API.getOrders(context.state.token);
     context.commit('setUserOrderHistory', orderHistory);
 }
+
+export const setCartAndUser = function (context) {
+    context.commit('setCartAndUser');
+}

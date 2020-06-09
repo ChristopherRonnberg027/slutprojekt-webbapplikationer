@@ -30,7 +30,7 @@
       <strong>{{user.role}}</strong>
     </p>
     <p v-else class="display-role elselog" @click="accessProfile()">
-      <strong>Log in for buying shit</strong>
+      <strong>Log in to buy shit</strong>
     </p>
   </header>
 </template>
@@ -46,10 +46,9 @@ export default {
     }
   },
   methods: {
-    async accessProfile() {
+    accessProfile() {
       if (this.$store.state.user) {
         if (this.$route.name !== "MyAccount") {
-          await this.$store.dispatch("getOrders");
           this.$router.push({ name: "MyAccount" }).catch(error => {
             if (error.name != "NavigationDuplicated") {
               throw error;
