@@ -8,7 +8,7 @@ export default {
         price : 0,
         shortDesc : "",
         longDesc : "",
-        imgFile : "skate-hero-1.jpg",
+        imgFile : "img-placeholder-sinus.png",
         serial:""
     },
     token: null
