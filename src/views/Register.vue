@@ -3,22 +3,22 @@
     <h1>register new</h1>
     <section class="email-info">
       <p>email</p>
-      <input class="email" type="text" v-model="newUser.email" />
+      <input class="email" type="text" v-model="newUser.email" spellcheck="false" />
       <p>password</p>
-      <input class="password" type="text" v-model="newUser.password" />
+      <input class="password" type="password" v-model="newUser.password" />
       <p>password again</p>
-      <input class="password" type="text" v-model="newUser.repeatPassword" />
+      <input class="password" type="password" v-model="newUser.repeatPassword" />
     </section>
     <section class="personal-info">
       <p>name</p>
-      <input clas="name" type="text" v-model="newUser.name" />
+      <input clas="name" type="text" v-model="newUser.name" spellcheck="false" />
       <p>street</p>
-      <input clas="street" type="text" v-model="newUser.adress.street" />
+      <input clas="street" type="text" v-model="newUser.adress.street" spellcheck="false" />
       <p>city</p>
-      <input clas="city" type="text" v-model="newUser.adress.city" />
+      <input clas="city" type="text" v-model="newUser.adress.city" spellcheck="false" />
       <p>zip</p>
-      <input clas="zip" type="text" v-model="newUser.adress.zip" />
-      <p class="register" @click="registerUser()">register</p>
+      <input clas="zip" type="text" v-model="newUser.adress.zip" spellcheck="false" />
+      <p class="register btn" @click="registerUser()">register</p>
     </section>
   </main>
 </template>
@@ -43,61 +43,39 @@ export default {
   methods: {
     async registerUser() {
       await this.$store.dispatch("register", this.newUser);
-      this.$router.push({name: 'MyAccount'});
+      this.$router.push({ name: "MyAccount" });
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "@/scss/button-style.scss";
 main {
-  //margin: 0 auto;
-  //max-width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  // display: grid;
 
   h1 {
     margin: 4rem 0;
   }
   section {
     background-color: rgba(0, 0, 0, 0.15);
-    display: grid;
-    margin-bottom: 2rem;
-    padding: 2rem;
+    width: 90%;
+    max-width: 600px;
+    padding: 3rem;
+    margin-bottom: 3rem;
+
     input {
-      margin-bottom: 1rem;
-      border-radius: 0;
-      border: 1px solid black;
+      border: none;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0.5rem;
+      outline: none;
     }
     .register {
-      margin-top: 3rem;
-      text-align: center;
-      font-size: 1rem;
-      font-weight: 700;
       background: #58e0b7;
-      border: 2px solid #000000;
-      padding: 0rem 1rem;
-      &:hover {
-        cursor: pointer;
-        background: cornflowerblue;
-      }
-      &:active {
-        transform: scale(0.98);
-      }
-      &:focus {
-        outline: none;
-      }
-    }
-    p {
-      font-weight: 500;
     }
   }
-
-  // button {
-  //   width: 100%;
-  //   display: block;
-  // }
 }
 </style>
