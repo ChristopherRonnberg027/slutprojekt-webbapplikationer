@@ -1,12 +1,18 @@
 <template>
   <main>
-    <h1>Your order is on the way!</h1>
+    <h1>Thank you! Your order is on the way!</h1>
     <div class="shipping-container">
-      <h3>Your order and billing is shipped to:</h3>
-      <h4>total sum is: {{totalSum}}</h4>
+      <h4>
+        Order total sum:
+        <strong>{{totalSum}}:-</strong>
+      </h4>
+      <h3 class="totalsum">Your order and billing is shipped to:</h3>
+      <p>Billing adress:</p>
+      <p class="shipping-info">{{user.name}}</p>
       <p class="shipping-info">{{user.adress.street}}</p>
       <p class="shipping-info">{{user.adress.zip}}</p>
       <p class="shipping-info">{{user.adress.city}}</p>
+      <p class="line"></p>
       <p class="back-btn" @click="toProducts">Back to products!</p>
     </div>
   </main>
@@ -21,9 +27,6 @@ export default {
     totalSum: Number
   },
   computed: {
-    total() {
-      return this.$store.getters.cartTotalPrice;
-    },
     user() {
       return this.$store.state.user;
     }
@@ -33,8 +36,8 @@ export default {
       this.$router.push("/products");
     }
   },
-  created(){
-    if (!this.totalSum){
+  created() {
+    if (!this.totalSum) {
       this.$router.push("/shoppingcart");
     }
   }
@@ -45,24 +48,31 @@ export default {
 main {
   h1 {
     text-align: center;
-    padding-bottom: 3rem;
+    padding: 3rem;
   }
+
   .shipping-container {
     max-width: 500px;
     background-color: rgba(0, 0, 0, 0.15);
-    //border: 1px solid black;
     padding: 1rem;
     margin: 0 auto;
     margin-bottom: 3rem;
-    //box-shadow: 0px 5px 1px -3px rgba(0, 0, 0, 0.75);
-    h3 {
-      border-bottom: 1px solid black;
+
+    h3,
+    h4 {
       margin-bottom: 1rem;
       padding-bottom: 0.5rem;
     }
 
     .shipping-info {
       font-weight: 800;
+    }
+    .line {
+      padding-top: 1rem;
+    }
+    h3,
+    .line {
+      border-bottom: 1px solid black;
     }
     .back-btn {
       margin-top: 3rem;
