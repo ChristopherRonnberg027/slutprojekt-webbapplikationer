@@ -4,18 +4,18 @@
     <section>
       <div>
         <p>email</p>
-        <input v-model="userCredentials.email" type="text" />
+        <input spellcheck="false" v-model="userCredentials.email" type="text" />
         <p v-if="!emailIsValid">Email must be a valid address, e.g. me@mydomain.com</p>
       </div>
       <div>
         <p>password</p>
-        <input v-model="userCredentials.password" type="text" />
+        <input spellcheck="false" v-model="userCredentials.password" type="password" />
         <p
           v-if="!passwordIsValid"
         >Password must alphanumeric (@, _ and - are also allowed) and be 8 - 20 characters</p>
       </div>
-      <p class="login" @click="submit()">log in</p>
-      <p class="register" @click="register()">register</p>
+      <p class="login btn" @click="submit()">log in</p>
+      <p class="register btn" @click="register()">register</p>
     </section>
   </main>
 </template>
@@ -63,8 +63,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/scss/button-style.scss";
 main {
-  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -74,66 +74,27 @@ main {
   }
 
   section {
-    
+    background-color: rgba(0, 0, 0, 0.15);
     width: 90%;
     max-width: 600px;
-    padding-bottom: 3rem;
+    padding: 3rem;
+    margin-bottom: 3rem;
 
     div {
       margin-top: 2rem;
-      input{
+      input {
+        border: none;
+        box-sizing: border-box;
         width: 100%;
         padding: 0.5rem;
-      }
-    }
-
-    button {
-      display: block;
-      width: 100%;
-    }
-
-    .register {
-      box-sizing: border-box;
-        padding: 0.5rem;
-      width: 100%;
-      margin-top: 3rem;
-      text-align: center;
-      font-size: 1rem;
-      font-weight: 700;
-      background: #eee;
-      border: 2px solid #000000;
-     // padding: 0rem 1rem;
-      &:hover {
-        cursor: pointer;
-        background: cornflowerblue;
-      }
-      &:active {
-        transform: scale(0.98);
-      }
-      &:focus {
         outline: none;
       }
+    }
+    .register {
+      background: #eee;
     }
     .login {
-        padding: 0.5rem;
-      width: 100%;
-      margin-top: 3rem;
-      text-align: center;
-      font-size: 1rem;
-      font-weight: 700;
       background: #58e0b7;
-      border: 2px solid #000000;
-      //padding: 0rem 1rem;
-      &:hover {
-        cursor: pointer;
-        background: cornflowerblue;
-      }
-      &:active {
-        transform: scale(0.98);
-      }
-      &:focus {
-        outline: none;
-      }
     }
   }
 }

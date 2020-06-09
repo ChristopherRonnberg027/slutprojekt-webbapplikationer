@@ -37,17 +37,14 @@ h1, h2, h3 {
 }
 body {
   background-color: #c4c4c4;
-  //background-color: #eee;
 }
 
 #app {
   margin: 0 auto;
   max-width: 1224px;
-  //height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: white;
-  //padding: 0rem 2rem 0rem 2rem;
 }
 </style>
