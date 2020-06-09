@@ -50,6 +50,8 @@ export default {
         if (this.$store.state.user) {
           await this.$store.dispatch("getOrders");
           this.$router.push({ name: "MyAccount" });
+        } else {
+          console.log('wrong email or password');
         }
       } else {
         console.log("form is not valid");
