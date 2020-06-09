@@ -28,6 +28,7 @@ export default {
     async submit() {
       await this.$store.dispatch("login", this.userCredentials);
       if (this.$store.state.user) {
+        await this.$store.dispatch("getOrders");
         this.$router.push({ name: "MyAccount" });
       }
     },
