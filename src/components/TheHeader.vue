@@ -46,10 +46,10 @@ export default {
     }
   },
   methods: {
-    async accessProfile() {
+    accessProfile() {
       if (this.$store.state.user) {
         if (this.$route.name !== "MyAccount") {
-          await this.$store.dispatch("getOrders");
+          this.$store.dispatch("getOrders");
           this.$router.push({ name: "MyAccount" });
         }
       } else {
