@@ -7,6 +7,7 @@ export const addToCart = (state, product) => {
     } else {
         state.cart.push({ quantity: 1, product: product })
     }
+    localStorage.setItem('cart', JSON.stringify(state.cart))
 }
 
 export const removeFromCart = (state, product) => {
@@ -19,15 +20,19 @@ export const removeFromCart = (state, product) => {
             return cartItem.product._id != cartItemInCart.product._id;
         });
     }
+    localStorage.setItem('cart', JSON.stringify(state.cart))
 }
 
 export const clearCart = (state) => {
     state.cart = []
+    localStorage.removeItem('cart')
 }
 
 export const setUser = (state, user) => {
     state.user = user.user;
     state.token = user.token;
+    sessionStorage.setItem('user', JSON.stringify(state.user))
+    sessionStorage.setItem('token', JSON.stringify(state.token))
 }
 
 export const addNewProduct = (state, newProduct) => {
@@ -57,4 +62,16 @@ export const setProduct = (state, product) => {
 
 export const logout = (state) => {
     state.user = null;
+    sessionStorage.removeItem('user')
+    sessionStorage.removeItem('token')
+}
+export const setCartAndUser = (state) => {
+    
+    if (!state.user && sessionStorage.getItem('user')) {
+        state.user = JSON.parse(sessionStorage.getItem('user'));
+        state.token = JSON.parse(sessionStorage.getItem('token'));
+    }
+    if (!state.cart.length && localStorage.getItem('cart')) {
+        state.cart = JSON.parse(localStorage.getItem('cart'));
+    }
 }

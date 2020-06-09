@@ -9,7 +9,7 @@ import ShoppingCart from '../views/ShoppingCart.vue'
 import SingleProduct from '../views/SingleProduct'
 import Register from '../views/Register'
 import AdminArea from '../views/AdminArea'
-import Store from "../store/index";
+import store from "../store/index";
 
 Vue.use(VueRouter)
 
@@ -25,7 +25,7 @@ const routes = [
     component: Checkout,
     props: true,
     beforeEnter: (to, from, next) => {
-      if (Store.state.user) {
+      if (store.state.user) {
         next()
       } else {
         next({ name: 'ShoppingCart' })
@@ -36,9 +36,12 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
-    beforeEnter: (to, from, next) => {
-      if (Store.state.user) {
-        next(false)
+    beforeEnter: async (to, from, next) => {
+      if (!store.state.user) {
+        await store.dispatch('setCartAndUser')
+      }
+      if (store.state.user) {
+        next({ name: 'MyAccount' })
       } else {
         next()
       }
@@ -53,10 +56,11 @@ const routes = [
     path: '/myaccount',
     name: 'MyAccount',
     component: MyAccount,
-    beforeEnter: (to, from, next) => {
-      if (!Store.state.user) {
+    beforeEnter: async (to, from, next) => {
+      if (!store.state.user) {
         next({ name: 'Login' })
       } else {
+        await store.dispatch("getOrders");
         next()
       }
     }
@@ -91,14 +95,17 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+  if (!store.state.user) {
+    await store.dispatch('setCartAndUser')
+  }
   if (to.meta.reqAdmin) {
-    if (!Store.state.user) {
-      router.push({ name: 'Login' })
-    } else if (Store.state.user.role === 'admin') {
+    if (!store.state.user) {
+      next({ name: 'Login' })
+    } else if (store.state.user.role === 'admin') {
       next();
-    } else if (Store.state.user.role === 'customer') {
-      router.push({ name: 'MyAccount' })
+    } else if (store.state.user.role === 'customer') {
+      next({ name: 'MyAccount' })
     }
   } else {
     next();
