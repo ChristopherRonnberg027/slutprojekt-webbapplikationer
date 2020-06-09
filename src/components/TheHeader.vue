@@ -67,7 +67,9 @@ export default {
       }
     },
     toHome() {
-      this.$router.push("/");
+      if (this.$route.name !== "Home") {
+        this.$router.push("/");
+      }  
     },
     accessAdminArea() {
       if (this.$route.name !== "AdminArea") {
