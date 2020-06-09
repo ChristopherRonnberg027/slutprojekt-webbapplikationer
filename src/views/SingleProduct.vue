@@ -1,9 +1,7 @@
 <template>
   <main class="single-product">
-    <p>{{product.category}}</p>
     <h1>{{product.title}}</h1>
     <product :product="product" singleProduct />
-    <h2>{{product.category}}</h2>
     <p>{{product.longDesc}}</p>
   </main>
 </template>

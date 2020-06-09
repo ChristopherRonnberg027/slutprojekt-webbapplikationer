@@ -18,7 +18,6 @@
       <input clas="city" type="text" v-model="newUser.adress.city" />
       <p>zip</p>
       <input clas="zip" type="text" v-model="newUser.adress.zip" />
-      <!-- <button @click="registerUser()" class="registerbtn">register new</button> -->
       <p class="register" @click="registerUser()">register</p>
     </section>
   </main>
@@ -42,8 +41,9 @@ export default {
     };
   },
   methods: {
-    registerUser() {
-      this.$store.dispatch("register", this.newUser);
+    async registerUser() {
+      await this.$store.dispatch("register", this.newUser);
+      this.$router.push({name: 'MyAccount'});
     }
   }
 };

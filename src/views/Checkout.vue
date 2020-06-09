@@ -21,7 +21,6 @@ export default {
     totalSum: Number
   },
   computed: {
-    // beforeCreate() {},
     total() {
       return this.$store.getters.cartTotalPrice;
     },
@@ -30,9 +29,6 @@ export default {
     }
   },
   methods: {
-    // user(){
-    //   return this.$store.state.user;
-    // }
     toProducts() {
       this.$router.push("/products");
     }

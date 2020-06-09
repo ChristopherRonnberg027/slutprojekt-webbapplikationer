@@ -6,9 +6,7 @@
       <input v-model="userCredentials.email" type="text" />
       <p>password</p>
       <input v-model="userCredentials.password" type="text" />
-      <!-- <button @click="submit()">log in</button> -->
-      <p class="login" @click.once="submit()">log in</p>
-      <!-- <button @click="register()" class="register">register</button> -->
+      <p class="login" @click="submit()">log in</p>
       <p class="register" @click="register()">register</p>
     </section>
   </main>

@@ -9,6 +9,7 @@
 
 <script>
 import Product from "@/components/Product";
+
 export default {
   name: "Products",
   components: {

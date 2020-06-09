@@ -1,11 +1,11 @@
 <template>
   <section class="wrapper">
     <div class="top">
-      <h3 class="title">{{id?'Edit Product':'Add New Product'}}</h3>
-      <h3 class="cursor cancel" @click="cancel()">
+      <h3 class="title">{{id ? 'Edit Product' : 'Add New Product'}}</h3>
+      <div class="cursor cancel" @click="cancel()">
         <img class="cancel-icon" src="@/assets/close.svg" alt />
-        <p>Cancel Input</p>
-      </h3>
+        <h3>Cancel Input</h3>
+      </div>
     </div>
     <div class="container">
       <div class="error" v-if="error">No empty fields allowed!</div>
@@ -17,10 +17,6 @@
         <div class="input">
           <p>Price</p>
           <input type="number" v-model="product.price" />
-        </div>
-        <div class="input">
-          <p>Category</p>
-          <input type="text" v-model="product.category" />
         </div>
         <div class="input">
           <p>Short Description</p>
@@ -62,7 +58,6 @@ export default {
         title: "",
         price: null,
         shortDesc: "",
-        category: "",
         longDesc: "",
         imgFile: ""
       },
@@ -74,7 +69,6 @@ export default {
       return {
         title: this.productToCreateOrEdit.title,
         price: this.productToCreateOrEdit.price,
-        category: this.productToCreateOrEdit.category,
         shortDesc: this.productToCreateOrEdit.shortDesc,
         longDesc: this.productToCreateOrEdit.longDesc,
         imgFile: this.productToCreateOrEdit.imgFile
@@ -85,11 +79,10 @@ export default {
     cancel() {
       this.$emit("cancel");
     },
-    saveProduct() {
+    async saveProduct() {
       if (
         !this.product.title ||
         !this.product.price ||
-        !this.product.category ||
         !this.product.shortDesc ||
         !this.product.longDesc ||
         !this.product.imgFile
@@ -97,7 +90,8 @@ export default {
         this.error = true;
       } else {
         if (this.id) {
-          this.$store.dispatch("editProduct", this.product);
+          this.product._id = this.id;
+          await this.$store.dispatch("editProduct", this.product);
         } else {
           this.$store.dispatch("createProduct", this.product);
         }
