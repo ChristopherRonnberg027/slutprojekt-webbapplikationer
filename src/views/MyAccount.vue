@@ -34,12 +34,12 @@
     <section class="user-orders">
       <h2>Order history</h2>
       <article v-for="order in orders" :key="order._id">
-        <p><strong>Date for purchase: </strong>{{order.timeStamp}}</p>
+        <p><strong>Date for purchase: </strong>{{new Date(order.timeStamp)}}</p>
         <p><strong>Delivery status: </strong>{{order.status}}</p>
         <p><strong>Total sum: </strong>{{order.orderValue}}</p>
-        <p v-for="item in order.items" :key="item.id">
+        <!-- <p v-for="item in order.items" :key="item.id">
           <span><strong>Item id: </strong>{{item}}</span>
-        </p>
+        </p> -->
       </article>
     </section>
   </main>

@@ -4,8 +4,7 @@
     <div class="cart-item-container">
       <cart-item v-for="cartItem in cart" :key="cartItem.product._id" :cartItem="cartItem" />
       <h2>Total: {{total}}</h2>
-      <!-- <button @click="createOrder" class="purchase">Checkout</button> -->
-      <p v-if="total" class="create-btn" @click.once="createOrder">Checkout</p>
+      <p v-if="total" class="create-btn" @click.once="createOrder()">Checkout</p>
       <div v-if="!total" class="empty">
         <p>
           <strong>Oh no! Your cart is empty! Why not buy some stuff?</strong>
@@ -45,7 +44,6 @@ export default {
           }
         }
         this.$store.dispatch("createOrder", { items: this.items });
-        //this.$router.push("/checkout");
         this.$router.push({name: 'Checkout', params: {totalSum: this.total}});
       } else {
         this.$router.push("/login");

@@ -1,14 +1,13 @@
 <template>
   <div class="home">
     <div class="intro">
-      <!-- <h1>Skate! Don't hate!</h1> -->
+      <h1>Skate, don't hate!</h1>
       <div class="img-container">
         <img src="@/assets/skate-hero-1.jpg" alt />
       </div>
     </div>
     <footer>
       <div class="logo-container">
-        <!-- <img src="@/assets/sinus-logo.svg" alt /> -->
         <img src="../assets/test/svg_test-black-sinus.svg" alt />
       </div>
     </footer>
@@ -52,12 +51,4 @@ export default {
     }
   }
 }
-
-// @media screen and(max-width: 600px) {
-//   .home {
-//     .intro {
-//       display: none;
-//     }
-//   }
-// }
 </style>

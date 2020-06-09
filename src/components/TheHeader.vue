@@ -46,11 +46,15 @@ export default {
     }
   },
   methods: {
-    accessProfile() {
+    async accessProfile() {
       if (this.$store.state.user) {
         if (this.$route.name !== "MyAccount") {
-          this.$store.dispatch("getOrders");
-          this.$router.push({ name: "MyAccount" });
+          await this.$store.dispatch("getOrders");
+          this.$router.push({ name: "MyAccount" }).catch(error => {
+            if (error.name != "NavigationDuplicated") {
+              throw error;
+            }
+          });
         }
       } else {
         if (this.$route.name !== "Login") {
