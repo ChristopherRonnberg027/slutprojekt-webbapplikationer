@@ -115,6 +115,7 @@ body {
       z-index: 101;
       background-color: #9e9e9e;
       border-radius: 100%;
+      border: 2px solid black;
       padding: 2rem;
       margin-top: 2rem;
       .lds-ring {
@@ -155,6 +156,7 @@ body {
     }
     #loader-icon {
       background-color: #9e9e9e;
+      border: 2px solid black;
       border-radius: 30%/80%;
       padding: 1rem;
       z-index: 101;
