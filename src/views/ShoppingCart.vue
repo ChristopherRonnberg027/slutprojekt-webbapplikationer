@@ -36,17 +36,18 @@ export default {
     }
   },
   methods: {
-    createOrder() {
+    async createOrder() {
       if (this.$store.state.user) {
         for (const cartItem of this.cart) {
           for (let i = 0; i < cartItem.quantity; i++) {
             this.items.push(cartItem.product._id);
           }
         }
-        this.$store.dispatch("createOrder", { items: this.items });
+        let total=this.total
+        await this.$store.dispatch("createOrder", { items: this.items });
         this.$router.push({
           name: "Checkout",
-          params: { totalSum: this.total }
+          params: { totalSum: total }
         });
       } else {
         this.$router.push("/login");

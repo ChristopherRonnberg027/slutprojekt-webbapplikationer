@@ -23,6 +23,9 @@ footer {
   .contact-info {
     padding: 2rem;
     color: white;
+    p:last-child {
+      text-align: center;
+    }
     .to-top {
       padding-top: 1rem;
       font-size: 1rem;
