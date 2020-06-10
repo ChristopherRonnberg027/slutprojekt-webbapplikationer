@@ -4,69 +4,92 @@
     <section class="email-info">
       <div class="error" v-if="error">Form is not valid</div>
       <div class="error" v-if="emailInUse">Email already in use</div>
-      <p>Email</p>
-      <input
-        name="email"
-        @input="inputHandler($event)"
-        spellcheck="false"
-        v-model="newUser.email"
-        type="text"
-      />
-      <p>Email must be a valid address, e.g. me@mydomain.com</p>
-      <p>Password</p>
-      <input
-        name="password"
-        @input="inputHandler($event)"
-        v-model="newUser.password"
-        type="password"
-      />
-      <p>Password must be alphanumeric (@, _ and - are also allowed) and be 8 - 20 characters</p>
-      <p>Password again</p>
-      <input
-        name="repeatPassword"
-        @input="inputHandler($event)"
-        v-model="newUser.repeatPassword"
-        type="password"
-      />
-      <p>Must match the first password</p>
+      <div>
+        <p>Email</p>
+        <input
+          name="email"
+          @focus="clearBothErrors()"
+          :class="emailClasses"
+          spellcheck="false"
+          v-model="newUser.email"
+          type="text"
+        />
+        <p v-if="emailClasses.invalid">Email must be a valid address, e.g. me@mydomain.com</p>
+      </div>
+      <div>
+        <p>Password</p>
+        <input
+          name="password"
+          @focus="clearError()"
+          :class="passwordClasses"
+          v-model="newUser.password"
+          type="password"
+        />
+        <p
+          v-if="passwordClasses.invalid"
+        >Password must be alphanumeric (@, _ and - are also allowed) and 8 - 20 characters</p>
+      </div>
+      <div>
+        <p>Password again</p>
+        <input
+          name="repeatPassword"
+          @focus="clearError()"
+          :class="repeatPasswordClasses"
+          v-model="newUser.repeatPassword"
+          type="password"
+        />
+        <p v-if="repeatPasswordClasses.invalid">Must match the first password</p>
+      </div>
     </section>
     <section class="personal-info">
-      <p>Name</p>
-      <input
-        name="name"
-        @input="inputHandler($event)"
-        type="text"
-        v-model="newUser.name"
-        spellcheck="false"
-      />
-      <p>Name must hold only a-ö or spaces and be 2 - 20 characters</p>
-      <p>Street</p>
-      <input
-        name="street"
-        @input="inputHandler($event)"
-        type="text"
-        v-model="newUser.adress.street"
-        spellcheck="false"
-      />
-      <p>Street must hold only a-ö, spaces or digits and be 2 - 20 characters</p>
-      <p>City</p>
-      <input
-        name="city"
-        @input="inputHandler($event)"
-        type="text"
-        v-model="newUser.adress.city"
-        spellcheck="false"
-      />
-      <p>City must hold only a-ö or spaces and be 2 - 20 characters</p>
-      <p>Zip</p>
-      <input
-        name="zip"
-        @input="inputHandler($event)"
-        type="text"
-        v-model="newUser.adress.zip"
-        spellcheck="false"
-      />
-      <p>Zip must hold only digits and spaces and be 2 - 10 characters</p>
+      <div>
+        <p>Name</p>
+        <input
+          name="name"
+          @focus="clearError()"
+          :class="nameClasses"
+          type="text"
+          v-model="newUser.name"
+          spellcheck="false"
+        />
+        <p v-if="nameClasses.invalid">Name must hold only a-ö or spaces and be 2 - 20 characters</p>
+      </div>
+      <div>
+        <p>Street</p>
+        <input
+          name="street"
+          @focus="clearError()"
+          :class="streetClasses"
+          type="text"
+          v-model="newUser.adress.street"
+          spellcheck="false"
+        />
+        <p v-if="streetClasses.invalid">Street must hold only a-ö, spaces or digits and be 2 - 20 characters</p>
+      </div>
+      <div>
+        <p>City</p>
+        <input
+          name="city"
+          @focus="clearError()"
+          :class="cityClasses"
+          type="text"
+          v-model="newUser.adress.city"
+          spellcheck="false"
+        />
+        <p v-if="cityClasses.invalid">City must hold only a-ö or spaces and be 2 - 20 characters</p>
+      </div>
+      <div>
+        <p>Zip</p>
+        <input
+          name="zip"
+          @focus="clearError()"
+          :class="zipClasses"
+          type="text"
+          v-model="newUser.adress.zip"
+          spellcheck="false"
+        />
+        <p v-if="zipClasses.invalid">Zip must hold only digits and spaces and be 2 - 10 characters</p>
+      </div>
       <p class="register btn" @click="registerUser()">Register</p>
     </section>
   </main>
@@ -101,9 +124,7 @@ export default {
   },
   computed: {
     emailIsValid() {
-      return this.patterns.email.test(
-        this.newUser.email
-      );
+      return this.patterns.email.test(this.newUser.email);
     },
     passwordIsValid() {
       return this.patterns.password.test(this.newUser.password);
@@ -133,39 +154,61 @@ export default {
         this.cityIsValid &&
         this.zipIsValid
       );
+    },
+    emailClasses() {
+      return {
+        valid: this.emailIsValid,
+        invalid: !this.emailIsValid && this.newUser.email.length
+      };
+    },
+    passwordClasses() {
+      return {
+        valid: this.passwordIsValid,
+        invalid: !this.passwordIsValid && this.newUser.password.length
+      };
+    },
+    repeatPasswordClasses() {
+      return {
+        valid:
+          this.newUser.password === this.newUser.repeatPassword &&
+          this.newUser.repeatPassword.length,
+        invalid:
+          this.newUser.password !== this.newUser.repeatPassword &&
+          this.newUser.repeatPassword.length
+      };
+    },
+    nameClasses() {
+      return {
+        valid: this.nameIsValid,
+        invalid: !this.nameIsValid && this.newUser.name.length
+      };
+    },
+    streetClasses() {
+      return {
+        valid: this.streetIsValid,
+        invalid: !this.streetIsValid && this.newUser.adress.street.length
+      };
+    },
+    cityClasses() {
+      return {
+        valid: this.cityIsValid,
+        invalid: !this.cityIsValid && this.newUser.adress.city.length
+      };
+    },
+    zipClasses() {
+      return {
+        valid: this.zipIsValid,
+        invalid: !this.zipIsValid && this.newUser.adress.zip.length
+      };
     }
   },
   methods: {
-    inputHandler(e) {
-      if (this.formIsValid && this.error) {
-        this.error = false;
-      }
-      if (e.target.attributes.name.value === 'email') {
-        this.emailInUse = false;
-      }
-      if (e.target.attributes.name.value === 'repeatPassword') {
-        this.validateRepeatPassword(e.target);
-      } else {
-        this.validate(e.target, this.patterns[e.target.attributes.name.value]);
-      }
+    clearError() {
+      this.error = false;
     },
-    validate(field, regex) {
-      if (regex.test(field.value)) {
-        field.classList.add("valid");
-        field.classList.remove("invalid");
-      } else {
-        field.classList.remove("valid");
-        field.classList.add("invalid");
-      }
-    },
-    validateRepeatPassword(field) {
-      if (this.newUser.repeatPassword === this.newUser.password) {
-        field.classList.add('valid');
-        field.classList.remove('invalid');
-      } else {
-        field.classList.remove('valid');
-        field.classList.add('invalid');
-      }
+    clearBothErrors() {
+      this.emailInUse = false;
+      this.error = false;
     },
     async registerUser() {
       if (this.formIsValid) {
@@ -174,9 +217,11 @@ export default {
           this.$router.push({ name: "MyAccount" });
         } else {
           this.emailInUse = true;
+          window.scrollTo(0,0);
         }
       } else {
         this.error = true;
+        window.scrollTo(0,0);
       }
     }
   }
@@ -199,6 +244,10 @@ main {
     max-width: 600px;
     padding: 3rem;
     margin-bottom: 3rem;
+
+    div {
+      margin-top: 2rem;
+    }
 
     .error {
       text-align: center;
@@ -229,10 +278,6 @@ main {
       text-align: center;
       margin: 0 10px 20px 10px;
       color: rgb(235, 152, 0);
-      display: none;
-    }
-    input.invalid + p {
-      display: block;
     }
     .register {
       background: #58e0b7;

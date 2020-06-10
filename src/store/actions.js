@@ -55,8 +55,10 @@ export const deleteProduct = async function (context, id) {
 }
 
 export const createOrder = async function (context, newOrder) {
+    context.commit('toggleLoader')
     await API.createOrder(newOrder, context.state.token);
     context.commit('clearCart');
+    context.commit('toggleLoader')
 }
 
 export const getOrders = async function (context) {
