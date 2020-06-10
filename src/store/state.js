@@ -11,5 +11,6 @@ export default {
         imgFile : "img-placeholder-sinus.png",
         serial:""
     },
-    token: null
+    token: null,
+    loader:false,
 }
