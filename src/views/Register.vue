@@ -1,10 +1,10 @@
 <template>
   <main>
-    <h1>register new</h1>
+    <h1>Register new</h1>
     <section class="email-info">
       <div class="error" v-if="error">Form is not valid</div>
       <div class="error" v-if="emailInUse">Email already in use</div>
-      <p>email</p>
+      <p>Email</p>
       <input
         name="email"
         @input="inputHandler($event)"
@@ -13,7 +13,7 @@
         type="text"
       />
       <p>Email must be a valid address, e.g. me@mydomain.com</p>
-      <p>password</p>
+      <p>Password</p>
       <input
         name="password"
         @input="inputHandler($event)"
@@ -21,7 +21,7 @@
         type="password"
       />
       <p>Password must be alphanumeric (@, _ and - are also allowed) and be 8 - 20 characters</p>
-      <p>password again</p>
+      <p>Password again</p>
       <input
         name="repeatPassword"
         @input="inputHandler($event)"
@@ -31,7 +31,7 @@
       <p>Must match the first password</p>
     </section>
     <section class="personal-info">
-      <p>name</p>
+      <p>Name</p>
       <input
         name="name"
         @input="inputHandler($event)"
@@ -40,7 +40,7 @@
         spellcheck="false"
       />
       <p>Name must hold only a-ö or spaces and be 2 - 20 characters</p>
-      <p>street</p>
+      <p>Street</p>
       <input
         name="street"
         @input="inputHandler($event)"
@@ -49,7 +49,7 @@
         spellcheck="false"
       />
       <p>Street must hold only a-ö, spaces or digits and be 2 - 20 characters</p>
-      <p>city</p>
+      <p>City</p>
       <input
         name="city"
         @input="inputHandler($event)"
@@ -58,7 +58,7 @@
         spellcheck="false"
       />
       <p>City must hold only a-ö or spaces and be 2 - 20 characters</p>
-      <p>zip</p>
+      <p>Zip</p>
       <input
         name="zip"
         @input="inputHandler($event)"
@@ -67,7 +67,7 @@
         spellcheck="false"
       />
       <p>Zip must hold only digits and spaces and be 2 - 10 characters</p>
-      <p class="register btn" @click="registerUser()">register</p>
+      <p class="register btn" @click="registerUser()">Register</p>
     </section>
   </main>
 </template>

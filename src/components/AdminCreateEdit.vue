@@ -10,7 +10,7 @@
     <div class="container">
       <div class="error" v-if="error">No empty fields allowed!</div>
       <div class="product">
-        <div class="input">
+        <div class="input product-title">
           <p>Title</p>
           <input type="text" v-model="product.title" />
         </div>
@@ -122,12 +122,14 @@ export default {
       flex: 8;
     }
   }
+  .product-title {
+    padding-top: 0.5rem;
+  }
 }
 .error {
-  //max-width: 200px;
   text-align: center;
-  margin: .5rem;
-  padding: .4rem;
+  margin: 0.5rem;
+  padding: 0.4rem;
   border: 1px solid crimson;
   color: crimson;
   font-weight: 700;

@@ -1,7 +1,7 @@
 <template>
   <main>
     <h1>{{user.name}}'s account</h1>
-    <p class="logout-btn" @click="logout()">log out</p>
+    <p class="logout btn" @click="logout()">Log out</p>
     <section class="user-details">
       <h2>Personal information</h2>
       <p>
@@ -29,7 +29,6 @@
         {{user.adress.zip}}
       </p>
     </section>
-    <!-- <button @click="logout()">logout</button> -->
 
     <section class="user-orders">
       <h2>Order history</h2>
@@ -37,9 +36,7 @@
         <p><strong>Date for purchase: </strong>{{new Date(order.timeStamp)}}</p>
         <p><strong>Delivery status: </strong>{{order.status}}</p>
         <p><strong>Total sum: </strong>{{order.orderValue}}</p>
-        <!-- <p v-for="item in order.items" :key="item.id">
-          <span><strong>Item id: </strong>{{item}}</span>
-        </p> -->
+
       </article>
     </section>
   </main>
@@ -65,10 +62,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/scss/button-style.scss";
 main {
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
   min-height: 500px;
   padding: 0 1rem;
   margin: 3rem;
@@ -78,8 +73,6 @@ main {
   }
 
   section {
-    //border: 1px solid red;
-    // max-width: 900px;
     margin: 2rem 0;
 
     padding: 1rem;
@@ -91,24 +84,9 @@ main {
       margin: 1.5rem 0;
     }
   }
-  .logout-btn {
+  .logout {
     max-width: 10rem;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 700;
     background: #58e0b7;
-    border: 2px solid #000000;
-    padding: 0rem 1rem;
-    &:hover {
-      cursor: pointer;
-      background: cornflowerblue;
-    }
-    &:active {
-      transform: scale(0.98);
-    }
-    &:focus {
-      outline: none;
-    }
   }
 }
 </style>

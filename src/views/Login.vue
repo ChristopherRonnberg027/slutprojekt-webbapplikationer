@@ -1,11 +1,11 @@
 <template>
   <main>
-    <h1>log in to buy</h1>
+    <h1>Log in to buy</h1>
     <section>
       <div class="error" v-if="error">Form is not valid</div>
       <div class="error" v-if="wrongEmailPassword">Wrong email or password</div>
       <div>
-        <p>email</p>
+        <p>Email</p>
         <input
           name="email"
           @input="inputHandler($event)"
@@ -16,7 +16,7 @@
         <p>Email must be a valid address, e.g. me@mydomain.com</p>
       </div>
       <div>
-        <p>password</p>
+        <p>Password</p>
         <input
           name="password"
           @input="inputHandler($event)"
@@ -26,8 +26,8 @@
         />
         <p>Password must alphanumeric (@, _ and - are also allowed) and be 8 - 20 characters</p>
       </div>
-      <p class="login btn" @click="submit()">log in</p>
-      <p class="register btn" @click="register()">register</p>
+      <p class="login btn" @click="submit()">Log in</p>
+      <p class="register btn" @click="register()">Register</p>
     </section>
   </main>
 </template>
