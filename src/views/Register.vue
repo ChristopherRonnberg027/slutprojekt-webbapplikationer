@@ -2,29 +2,71 @@
   <main>
     <h1>register new</h1>
     <section class="email-info">
+      <div class="error" v-if="error">Form is not valid</div>
+      <div class="error" v-if="emailInUse">Email already in use</div>
       <p>email</p>
-      <input class="email" type="text" v-model="newUser.email" spellcheck="false" />
-      <p class="errmess" v-if="!emailIsValid">Email must be a valid address, e.g. me@mydomain.com</p>
+      <input
+        name="email"
+        @input="inputHandler($event)"
+        spellcheck="false"
+        v-model="newUser.email"
+        type="text"
+      />
+      <p>Email must be a valid address, e.g. me@mydomain.com</p>
       <p>password</p>
-      <input class="password" type="password" v-model="newUser.password" />
-      <p class="errmess" v-if="!passwordIsValid">Password must alphanumeric (@, _ and - are also allowed) and be 8 - 20 characters</p>
+      <input
+        name="password"
+        @input="inputHandler($event)"
+        v-model="newUser.password"
+        type="password"
+      />
+      <p>Password must be alphanumeric (@, _ and - are also allowed) and be 8 - 20 characters</p>
       <p>password again</p>
-      <input class="password" type="password" v-model="newUser.repeatPassword" />
-      <p class="errmess" v-if="!repeatPasswordIsValid">Must match the first password</p>
+      <input
+        name="repeatPassword"
+        @input="inputHandler($event)"
+        v-model="newUser.repeatPassword"
+        type="password"
+      />
+      <p>Must match the first password</p>
     </section>
     <section class="personal-info">
       <p>name</p>
-      <input clas="name" type="text" v-model="newUser.name" spellcheck="false" />
-      <p class="errmess" v-if="!nameIsValid">Name must hold only a-z or spaces and be 2 - 20 characters</p>
+      <input
+        name="name"
+        @input="inputHandler($event)"
+        type="text"
+        v-model="newUser.name"
+        spellcheck="false"
+      />
+      <p>Name must hold only a-ö or spaces and be 2 - 20 characters</p>
       <p>street</p>
-      <input clas="street" type="text" v-model="newUser.adress.street" spellcheck="false" />
-      <p class="errmess" v-if="!streetIsValid">Street must hold only a-z, spaces or digits and be 2 - 20 characters</p>
+      <input
+        name="street"
+        @input="inputHandler($event)"
+        type="text"
+        v-model="newUser.adress.street"
+        spellcheck="false"
+      />
+      <p>Street must hold only a-ö, spaces or digits and be 2 - 20 characters</p>
       <p>city</p>
-      <input clas="city" type="text" v-model="newUser.adress.city" spellcheck="false" />
-      <p class="errmess" v-if="!cityIsValid">City must hold only a-z or spaces and be 2 - 20 characters</p>
+      <input
+        name="city"
+        @input="inputHandler($event)"
+        type="text"
+        v-model="newUser.adress.city"
+        spellcheck="false"
+      />
+      <p>City must hold only a-ö or spaces and be 2 - 20 characters</p>
       <p>zip</p>
-      <input clas="zip" type="text" v-model="newUser.adress.zip" spellcheck="false" />
-      <p class="errmess" v-if="!zipIsValid">Zip must hold only digits and spaces and be 2 - 10 characters</p>
+      <input
+        name="zip"
+        @input="inputHandler($event)"
+        type="text"
+        v-model="newUser.adress.zip"
+        spellcheck="false"
+      />
+      <p>Zip must hold only digits and spaces and be 2 - 10 characters</p>
       <p class="register btn" @click="registerUser()">register</p>
     </section>
   </main>
@@ -34,6 +76,8 @@
 export default {
   data() {
     return {
+      error: false,
+      emailInUse: false,
       newUser: {
         email: "",
         password: "",
@@ -44,32 +88,40 @@ export default {
           city: "",
           zip: ""
         }
+      },
+      patterns: {
+        email: /^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/i,
+        password: /^[\w@-]{8,20}$/,
+        name: /^[a-ö ]{2,20}$/i,
+        street: /^[a-ö\d ]{2,20}$/i,
+        city: /^[a-ö ]{2,20}$/i,
+        zip: /^[\d ]{2,10}$/
       }
     };
   },
   computed: {
     emailIsValid() {
-      return /^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/i.test(
+      return this.patterns.email.test(
         this.newUser.email
       );
     },
     passwordIsValid() {
-      return /^[\w@-]{8,20}$/.test(this.newUser.password);
+      return this.patterns.password.test(this.newUser.password);
     },
     repeatPasswordIsValid() {
       return this.newUser.password == this.newUser.repeatPassword;
     },
     nameIsValid() {
-      return /^[a-z ]{2,20}/i.test(this.newUser.name);
+      return this.patterns.name.test(this.newUser.name);
     },
     streetIsValid() {
-      return /^[a-z\d ]{2,20}$/i.test(this.newUser.adress.street);
+      return this.patterns.street.test(this.newUser.adress.street);
     },
     cityIsValid() {
-      return /^[a-z ]{2,20}$/i.test(this.newUser.adress.city);
+      return this.patterns.city.test(this.newUser.adress.city);
     },
     zipIsValid() {
-      return /^[\d ]{2,10}$/.test(this.newUser.adress.zip);
+      return this.patterns.zip.test(this.newUser.adress.zip);
     },
     formIsValid() {
       return (
@@ -84,16 +136,47 @@ export default {
     }
   },
   methods: {
+    inputHandler(e) {
+      if (this.formIsValid && this.error) {
+        this.error = false;
+      }
+      if (e.target.attributes.name.value === 'email') {
+        this.emailInUse = false;
+      }
+      if (e.target.attributes.name.value === 'repeatPassword') {
+        this.validateRepeatPassword(e.target);
+      } else {
+        this.validate(e.target, this.patterns[e.target.attributes.name.value]);
+      }
+    },
+    validate(field, regex) {
+      if (regex.test(field.value)) {
+        field.classList.add("valid");
+        field.classList.remove("invalid");
+      } else {
+        field.classList.remove("valid");
+        field.classList.add("invalid");
+      }
+    },
+    validateRepeatPassword(field) {
+      if (this.newUser.repeatPassword === this.newUser.password) {
+        field.classList.add('valid');
+        field.classList.remove('invalid');
+      } else {
+        field.classList.remove('valid');
+        field.classList.add('invalid');
+      }
+    },
     async registerUser() {
       if (this.formIsValid) {
         await this.$store.dispatch("register", this.newUser);
         if (this.$store.state.user) {
           this.$router.push({ name: "MyAccount" });
         } else {
-          console.log('Email already in use');
+          this.emailInUse = true;
         }
       } else {
-        console.log("form is not valid");
+        this.error = true;
       }
     }
   }
@@ -117,17 +200,39 @@ main {
     padding: 3rem;
     margin-bottom: 3rem;
 
-    .errmess {
-      color: rgb(255, 0, 0);
-      font-size: 0.9rem;
+    .error {
+      text-align: center;
+      margin: 0.5rem;
+      padding: 0.4rem;
+      border: 1px solid crimson;
+      color: crimson;
+      font-weight: 700;
     }
 
     input {
-      border: none;
+      border: 2px solid rgba(0, 0, 0, 0.15);
       box-sizing: border-box;
       width: 100%;
       padding: 0.5rem;
       outline: none;
+    }
+    .valid {
+      border-color: #58e0b7;
+    }
+    .invalid {
+      border-color: orange;
+    }
+    input + p {
+      font-family: arial;
+      font-size: 0.9em;
+      font-weight: bold;
+      text-align: center;
+      margin: 0 10px 20px 10px;
+      color: rgb(235, 152, 0);
+      display: none;
+    }
+    input.invalid + p {
+      display: block;
     }
     .register {
       background: #58e0b7;

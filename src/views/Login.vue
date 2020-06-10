@@ -2,17 +2,29 @@
   <main>
     <h1>log in to buy</h1>
     <section>
+      <div class="error" v-if="error">Form is not valid</div>
+      <div class="error" v-if="wrongEmailPassword">Wrong email or password</div>
       <div>
         <p>email</p>
-        <input spellcheck="false" v-model="userCredentials.email" type="text" />
-        <p v-if="!emailIsValid">Email must be a valid address, e.g. me@mydomain.com</p>
+        <input
+          name="email"
+          @input="inputHandler($event)"
+          spellcheck="false"
+          v-model="userCredentials.email"
+          type="text"
+        />
+        <p>Email must be a valid address, e.g. me@mydomain.com</p>
       </div>
       <div>
         <p>password</p>
-        <input spellcheck="false" v-model="userCredentials.password" type="password" />
-        <p
-          v-if="!passwordIsValid"
-        >Password must alphanumeric (@, _ and - are also allowed) and be 8 - 20 characters</p>
+        <input
+          name="password"
+          @input="inputHandler($event)"
+          spellcheck="false"
+          v-model="userCredentials.password"
+          type="password"
+        />
+        <p>Password must alphanumeric (@, _ and - are also allowed) and be 8 - 20 characters</p>
       </div>
       <p class="login btn" @click="submit()">log in</p>
       <p class="register btn" @click="register()">register</p>
@@ -24,26 +36,46 @@
 export default {
   data() {
     return {
+      error: false,
+      wrongEmailPassword: false,
+      patterns: {
+        email: /^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/i,
+        password: /^[\w@-]{8,20}$/
+      },
       userCredentials: {
-        email: "customer@example.com",
-        password: "password"
+        email: "",
+        password: ""
       }
     };
   },
   computed: {
     emailIsValid() {
-      return /^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/i.test(
-        this.userCredentials.email
-      );
+      return this.patterns.email.test(this.userCredentials.email);
     },
     passwordIsValid() {
-      return /^[\w@-]{8,20}$/.test(this.userCredentials.password);
+      return this.patterns.password.test(this.userCredentials.password);
     },
     formIsValid() {
       return this.emailIsValid && this.passwordIsValid;
     }
   },
   methods: {
+    inputHandler(e) {
+      if (this.formIsValid && this.error) {
+        this.error = false;
+      }
+      this.wrongEmailPassword = false;
+      this.validate(e.target, this.patterns[e.target.attributes.name.value]);
+    },
+    validate(field, regex) {
+      if (regex.test(field.value)) {
+        field.classList.add("valid");
+        field.classList.remove("invalid");
+      } else {
+        field.classList.remove("valid");
+        field.classList.add("invalid");
+      }
+    },
     async submit() {
       if (this.formIsValid) {
         await this.$store.dispatch("login", this.userCredentials);
@@ -51,10 +83,10 @@ export default {
           await this.$store.dispatch("getOrders");
           this.$router.push({ name: "MyAccount" });
         } else {
-          console.log('wrong email or password');
+          this.wrongEmailPassword = true;
         }
       } else {
-        console.log("form is not valid");
+        this.error = true;
       }
     },
     register() {
@@ -82,14 +114,41 @@ main {
     padding: 3rem;
     margin-bottom: 3rem;
 
+    .error {
+      text-align: center;
+      margin: 0.5rem;
+      padding: 0.4rem;
+      border: 1px solid crimson;
+      color: crimson;
+      font-weight: 700;
+    }
+
     div {
       margin-top: 2rem;
       input {
-        border: none;
+        border: 2px solid rgba(0, 0, 0, 0.15);
         box-sizing: border-box;
         width: 100%;
         padding: 0.5rem;
         outline: none;
+      }
+      .valid {
+        border-color: #58e0b7;
+      }
+      .invalid {
+        border-color: orange;
+      }
+      input + p {
+        font-family: arial;
+        font-size: 0.9em;
+        font-weight: bold;
+        text-align: center;
+        margin: 0 10px 20px 10px;
+        color: rgb(235, 152, 0);
+        display: none;
+      }
+      input.invalid + p {
+        display: block;
       }
     }
     .register {
