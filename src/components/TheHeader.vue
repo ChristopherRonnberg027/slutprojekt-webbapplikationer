@@ -24,12 +24,12 @@
       </section>
     </div>
 
-    <p class="display-role" v-if="user">
+    <p class="display-role cursor" v-if="user" @click="accessProfile()">
       Logged in:
       <strong>{{user.name}}</strong> | Role:
       <strong>{{user.role}}</strong>
     </p>
-    <p v-else class="display-role elselog" @click="accessProfile()">
+    <p v-else class="display-role cursor" @click="accessProfile()">
       <strong>Log in to buy shit</strong>
     </p>
   </header>
@@ -186,16 +186,14 @@ header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.55);
     margin: 0rem 1rem 0rem 1rem;
   }
-  .elselog {
+  .cursor {
     cursor: pointer;
   }
 }
 @media screen and (max-width: 400px) {
   .logo {
-    // background-color: red;
     img {
       width: 5rem;
-      //transform: rotate(-90deg);
     }
   }
 }
