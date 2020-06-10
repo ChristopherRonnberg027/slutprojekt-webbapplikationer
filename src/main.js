@@ -8,5 +8,8 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
+  async created() {
+      await this.$store.dispatch('setCartAndUser')
+  },
   render: h => h(App)
 }).$mount('#app')

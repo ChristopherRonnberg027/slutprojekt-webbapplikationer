@@ -1,0 +1,90 @@
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+@mixin flex-column-center {
+    @include flex-column;
+    align-items: center;
+}
+@mixin flex-row {
+    display: flex;
+    justify-content: space-between;
+}
+@mixin flex-row-end {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.wrapper {
+    margin-top: 2rem;
+    margin-bottom: 10rem;
+    min-width: 50vw;
+
+    @include flex-column-center;
+    .top {
+        @include flex-row;
+        align-items: center;
+        width: 100%;
+        .add,
+        .cancel {
+            @include flex-row;
+            .add-icon,
+            .cancel-icon {
+                padding-right: 0.5rem;
+            }
+        }
+
+    }
+
+    .container {
+        width: 100%;
+        @include flex-column;
+        background-color: #c4c4c4;
+
+        .product {
+            border-bottom: 1px solid black;
+            margin: 0rem 1rem;
+
+            display: flex;
+            > * {
+                margin: 1rem 0.5rem;
+            }
+        } 
+        .product:last-child{
+            border-bottom: none
+        }
+    }
+    .save-product {
+        align-self: flex-end;
+        margin-top: 3rem;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 700;
+        background: #58e0b7;
+        border: 2px solid #000000;
+        padding: 0.8rem 1rem;
+        &:hover {
+          cursor: pointer;
+          background: cornflowerblue;
+        }
+        &:active {
+          transform: scale(0.98);
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+    
+}
+
+
+.cursor:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    .title {
+        display: none;
+    }
+}

@@ -7,10 +7,13 @@ import MyAccount from '../views/MyAccount.vue'
 import Products from '../views/Products.vue'
 import ShoppingCart from '../views/ShoppingCart.vue'
 import SingleProduct from '../views/SingleProduct'
+import Register from '../views/Register'
+import AdminArea from '../views/AdminArea'
+import store from "../store/index";
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Home',
@@ -19,17 +22,48 @@ Vue.use(VueRouter)
   {
     path: '/checkout',
     name: 'Checkout',
-    component: Checkout
+    component: Checkout,
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (store.state.user) {
+        next()
+      } else {
+        next({ name: 'ShoppingCart' })
+      }
+    }
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter: async (to, from, next) => {
+      if (!store.state.user) {
+        await store.dispatch('setCartAndUser')
+      }
+      if (store.state.user) {
+        next({ name: 'MyAccount' })
+      } else {
+        next()
+      }
+    }
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
   },
   {
     path: '/myaccount',
     name: 'MyAccount',
-    component: MyAccount
+    component: MyAccount,
+    beforeEnter: async (to, from, next) => {
+      if (!store.state.user) {
+        next({ name: 'Login' })
+      } else {
+        await store.dispatch("getOrders");
+        next()
+      }
+    }
   },
   {
     path: '/products',
@@ -39,12 +73,19 @@ Vue.use(VueRouter)
   {
     path: '/products/:id',
     name: 'SingleProduct',
-    component: SingleProduct
+    component: SingleProduct,
+    props: true
   },
   {
     path: '/shoppingcart',
     name: 'ShoppingCart',
     component: ShoppingCart
+  },
+  {
+    path: '/admin',
+    name: 'AdminArea',
+    component: AdminArea,
+    meta: { reqAdmin: true }
   },
 ]
 
@@ -52,6 +93,23 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach(async (to, from, next) => {
+  if (!store.state.user) {
+    await store.dispatch('setCartAndUser')
+  }
+  if (to.meta.reqAdmin) {
+    if (!store.state.user) {
+      next({ name: 'Login' })
+    } else if (store.state.user.role === 'admin') {
+      next();
+    } else if (store.state.user.role === 'customer') {
+      next({ name: 'MyAccount' })
+    }
+  } else {
+    next();
+  }
 })
 
 export default router
