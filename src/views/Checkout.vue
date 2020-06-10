@@ -13,7 +13,7 @@
       <p class="shipping-info">{{user.adress.zip}}</p>
       <p class="shipping-info">{{user.adress.city}}</p>
       <p class="line"></p>
-      <p class="back-btn" @click="toProducts">Back to products!</p>
+      <p class="back btn" @click="toProducts">Back to products!</p>
     </div>
   </main>
 </template>
@@ -45,6 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/scss/button-style.scss";
 main {
   h1 {
     text-align: center;
@@ -74,24 +75,8 @@ main {
     .line {
       border-bottom: 1px solid black;
     }
-    .back-btn {
-      margin-top: 3rem;
-      text-align: center;
-      font-size: 1rem;
-      font-weight: 700;
+    .back {
       background: #58e0b7;
-      border: 2px solid #000000;
-      padding: 0rem 1rem;
-      &:hover {
-        cursor: pointer;
-        background: cornflowerblue;
-      }
-      &:active {
-        transform: scale(0.98);
-      }
-      &:focus {
-        outline: none;
-      }
     }
   }
 }

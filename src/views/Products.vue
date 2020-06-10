@@ -1,6 +1,5 @@
 <template>
   <main class="products">
-    <h1>CHECK OUT OUR PRODUCTS</h1>
     <section class="product-list">
       <product v-for="(singleProduct,i) in productList" :key="i" :product="singleProduct" />
     </section>
@@ -31,9 +30,6 @@ export default {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  h1 {
-    text-align: center;
-  }
   .product-list {
     padding-top: 3rem;
     display: grid;

@@ -38,5 +38,9 @@ export default {
     max-width: 600px;
     
     padding-bottom: 5rem;
+
+    p{
+      padding-top: 1rem;
+    }
 }
 </style>

@@ -4,12 +4,12 @@
     <div class="cart-item-container">
       <cart-item v-for="cartItem in cart" :key="cartItem.product._id" :cartItem="cartItem" />
       <h2>Total: {{total}}</h2>
-      <p v-if="total" class="create-btn" @click.once="createOrder()">Checkout</p>
+      <p v-if="total" class="create btn" @click.once="createOrder()">Checkout</p>
       <div v-if="!total" class="empty">
         <p>
           <strong>Oh no! Your cart is empty! Why not buy some stuff?</strong>
         </p>
-        <p class="back-btn" @click="toProducts">Back to products!</p>
+        <p class="back btn" @click="toProducts">Back to products!</p>
       </div>
     </div>
   </main>
@@ -44,7 +44,10 @@ export default {
           }
         }
         this.$store.dispatch("createOrder", { items: this.items });
-        this.$router.push({name: 'Checkout', params: {totalSum: this.total}});
+        this.$router.push({
+          name: "Checkout",
+          params: { totalSum: this.total }
+        });
       } else {
         this.$router.push("/login");
       }
@@ -57,14 +60,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .purchase {
-//   background: #83fbe5;
-//   border: 2px solid #000000;
-//   box-sizing: border-box;
-//   font-size: 1.5rem;
-//   padding: 0 1rem;
-// }
-
+@import "@/scss/button-style.scss";
 main {
   min-height: 500px;
   padding: 0 1rem;
@@ -84,25 +80,9 @@ main {
       margin-top: 1rem;
     }
   }
-  .create-btn,
-  .back-btn {
-    margin-top: 3rem;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 700;
+  .create,
+  .back {
     background: #58e0b7;
-    border: 2px solid #000000;
-    padding: 0rem 1rem;
-    &:hover {
-      cursor: pointer;
-      background: cornflowerblue;
-    }
-    &:active {
-      transform: scale(0.98);
-    }
-    &:focus {
-      outline: none;
-    }
   }
 }
 </style>

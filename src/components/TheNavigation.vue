@@ -21,7 +21,6 @@ export default {
 <style lang="scss" scoped>
 nav {
   display: flex;
-  // background-color: #9e9e9e;
 
   a {
     padding: .3rem;

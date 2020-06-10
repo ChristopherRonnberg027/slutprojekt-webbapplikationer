@@ -56,7 +56,6 @@ export default {
   @include flex-column;
 
   .image-container {
-    //border-radius: 5px;
     background-color: #e6e6e6;
     padding: 1rem 2rem 0;
     @include flex-row-end;
@@ -86,13 +85,13 @@ export default {
     .desc-buy {
       @include flex-row;
       .buy {
-        font-size: 0.8rem;
-        background: none;
+        font-size: 1rem;
+        background: #58e0b7;
         border: 2px solid #000000;
-        padding: 0rem 0.5rem;
+        padding: 0.5rem 0.5rem;
         &:hover {
           cursor: pointer;
-          background: #58e0b7;
+          background: cornflowerblue;
         }
         &:active {
           transform: scale(0.98);
