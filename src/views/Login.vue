@@ -3,6 +3,7 @@
     <h1>log in to buy</h1>
     <section>
       <div class="error" v-if="error">Form is not valid</div>
+      <div class="error" v-if="wrongEmailPassword">Wrong email or password</div>
       <div>
         <p>email</p>
         <input
@@ -36,6 +37,7 @@ export default {
   data() {
     return {
       error: false,
+      wrongEmailPassword: false,
       patterns: {
         email: /^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/i,
         password: /^[\w@-]{8,20}$/
@@ -62,6 +64,7 @@ export default {
       if (this.formIsValid && this.error) {
         this.error = false;
       }
+      this.wrongEmailPassword = false;
       this.validate(e.target, this.patterns[e.target.attributes.name.value]);
     },
     validate(field, regex) {
@@ -80,7 +83,7 @@ export default {
           await this.$store.dispatch("getOrders");
           this.$router.push({ name: "MyAccount" });
         } else {
-          alert("wrong email or password");
+          this.wrongEmailPassword = true;
         }
       } else {
         this.error = true;

@@ -3,6 +3,7 @@
     <h1>register new</h1>
     <section class="email-info">
       <div class="error" v-if="error">Form is not valid</div>
+      <div class="error" v-if="emailInUse">Email already in use</div>
       <p>email</p>
       <input
         name="email"
@@ -38,7 +39,7 @@
         v-model="newUser.name"
         spellcheck="false"
       />
-      <p>Name must hold only a-z or spaces and be 2 - 20 characters</p>
+      <p>Name must hold only a-ö or spaces and be 2 - 20 characters</p>
       <p>street</p>
       <input
         name="street"
@@ -47,7 +48,7 @@
         v-model="newUser.adress.street"
         spellcheck="false"
       />
-      <p>Street must hold only a-z, spaces or digits and be 2 - 20 characters</p>
+      <p>Street must hold only a-ö, spaces or digits and be 2 - 20 characters</p>
       <p>city</p>
       <input
         name="city"
@@ -56,7 +57,7 @@
         v-model="newUser.adress.city"
         spellcheck="false"
       />
-      <p>City must hold only a-z or spaces and be 2 - 20 characters</p>
+      <p>City must hold only a-ö or spaces and be 2 - 20 characters</p>
       <p>zip</p>
       <input
         name="zip"
@@ -76,6 +77,7 @@ export default {
   data() {
     return {
       error: false,
+      emailInUse: false,
       newUser: {
         email: "",
         password: "",
@@ -138,6 +140,9 @@ export default {
       if (this.formIsValid && this.error) {
         this.error = false;
       }
+      if (e.target.attributes.name.value === 'email') {
+        this.emailInUse = false;
+      }
       if (e.target.attributes.name.value === 'repeatPassword') {
         this.validateRepeatPassword(e.target);
       } else {
@@ -168,7 +173,7 @@ export default {
         if (this.$store.state.user) {
           this.$router.push({ name: "MyAccount" });
         } else {
-          alert("Email already in use");
+          this.emailInUse = true;
         }
       } else {
         this.error = true;
