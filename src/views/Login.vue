@@ -8,23 +8,26 @@
         <p>Email</p>
         <input
           name="email"
-          @input="inputHandler($event)"
+          @focus="clearErrors()"
+          :class="emailClasses"
           spellcheck="false"
           v-model="userCredentials.email"
           type="text"
         />
-        <p>Email must be a valid address, e.g. me@mydomain.com</p>
+        <p v-if="emailClasses.invalid">Email must be a valid address, e.g. me@mydomain.com</p>
       </div>
       <div>
         <p>Password</p>
         <input
           name="password"
-          @input="inputHandler($event)"
-          spellcheck="false"
+          @focus="clearErrors()"
+          :class="passwordClasses"
           v-model="userCredentials.password"
           type="password"
         />
-        <p>Password must alphanumeric (@, _ and - are also allowed) and be 8 - 20 characters</p>
+        <p
+          v-if="passwordClasses.invalid"
+        >Password must be alphanumeric (@, _ and - are also allowed) and 8 - 20 characters</p>
       </div>
       <p class="login btn" @click="submit()">Log in</p>
       <p class="register btn" @click="register()">Register</p>
@@ -57,27 +60,28 @@ export default {
     },
     formIsValid() {
       return this.emailIsValid && this.passwordIsValid;
+    },
+    emailClasses() {
+      return {
+        valid: this.emailIsValid,
+        invalid: !this.emailIsValid && this.userCredentials.email.length
+      };
+    },
+    passwordClasses() {
+      return {
+        valid: this.passwordIsValid,
+        invalid: !this.passwordIsValid && this.userCredentials.password.length
+      };
     }
   },
   methods: {
-    inputHandler(e) {
-      if (this.formIsValid && this.error) {
-        this.error = false;
-      }
+    clearErrors() {
+      this.error = false;
       this.wrongEmailPassword = false;
-      this.validate(e.target, this.patterns[e.target.attributes.name.value]);
-    },
-    validate(field, regex) {
-      if (regex.test(field.value)) {
-        field.classList.add("valid");
-        field.classList.remove("invalid");
-      } else {
-        field.classList.remove("valid");
-        field.classList.add("invalid");
-      }
     },
     async submit() {
       if (this.formIsValid) {
+        this.error = false;
         await this.$store.dispatch("login", this.userCredentials);
         if (this.$store.state.user) {
           await this.$store.dispatch("getOrders");
@@ -145,10 +149,6 @@ main {
         text-align: center;
         margin: 0 10px 20px 10px;
         color: rgb(235, 152, 0);
-        display: none;
-      }
-      input.invalid + p {
-        display: block;
       }
     }
     .register {
