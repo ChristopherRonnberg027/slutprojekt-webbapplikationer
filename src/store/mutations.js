@@ -75,3 +75,7 @@ export const setCartAndUser = (state) => {
         state.cart = JSON.parse(localStorage.getItem('cart'));
     }
 }
+
+export const toggleLoader = (state) => {
+    state.loader=!state.loader
+}
