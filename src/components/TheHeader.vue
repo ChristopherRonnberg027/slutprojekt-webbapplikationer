@@ -183,6 +183,7 @@ header {
   .display-role {
     text-align: right;
     color: black;
+    //background-color: #58e0b7;
     border-bottom: 1px solid rgba(0, 0, 0, 0.55);
     margin: 0rem 1rem 0rem 1rem;
   }

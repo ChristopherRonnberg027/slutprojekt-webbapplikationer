@@ -41,7 +41,6 @@ export default {
   margin-bottom: 2rem;
   .stroke {
     margin: auto;
-    //padding: 1rem;
     border-bottom: 1px dotted black;
   }
   .quantity-btn {
