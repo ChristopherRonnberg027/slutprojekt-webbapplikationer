@@ -112,4 +112,16 @@ router.beforeEach(async (to, from, next) => {
   }
 })
 
+router.afterEach((to, from) => {
+  if (to.name === 'Products' && from.name !== 'SingleProduct') {
+    window.scrollTo(0, 0)
+  }
+  if (to.name !== 'Products') {
+    window.scrollTo(0, 0)
+  }
+  if (to.name === 'SingleProduct') {
+    window.scrollTo(0, 200)
+  }
+})
+
 export default router
